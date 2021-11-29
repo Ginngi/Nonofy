@@ -1,0 +1,23 @@
+import com.pokedix.Libs
+
+apply from: "$rootDir/gradle/android-gradle-conf.gradle"
+
+dependencies {
+    implementation(
+            project(":home"),
+            project(":game"),
+    )
+
+    api Libs.Compose.navigation
+
+    api Libs.Hilt.navigation
+    api Libs.Hilt.viewModel
+
+    implementation Libs.Ktx.core
+    implementation Libs.Ktx.fragment
+    implementation Libs.Ktx.viewModel
+    implementation Libs.Ktx.lifecycle
+
+    implementation Libs.Compose.viewModel
+    implementation Libs.Compose.runtime
+}

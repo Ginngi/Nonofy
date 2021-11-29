@@ -1,0 +1,13 @@
+import com.pokedix.Libs
+
+apply from: "$rootDir/gradle/android-gradle-conf.gradle"
+
+dependencies {
+    implementation(
+            project(":ui")
+    )
+
+    implementation Libs.Compose.viewModel
+
+    implementation Libs.Hilt.navigation
+}

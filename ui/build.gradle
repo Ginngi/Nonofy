@@ -1,0 +1,11 @@
+import com.pokedix.Libs
+
+apply from: "$rootDir/gradle/android-gradle-conf.gradle"
+
+dependencies {
+    api Libs.Compose.compiler
+    api Libs.Compose.ui
+    api Libs.Compose.material
+    api Libs.Compose.uiTooling
+    api Libs.Compose.activity
+}
