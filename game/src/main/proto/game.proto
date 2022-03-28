@@ -1,0 +1,16 @@
+syntax = "proto3";
+package com.nonofy.game.data.proto;
+
+message GridEntity {
+  repeated int32 pixels = 1;
+  int32 size = 2;
+  int32 numFilledPixels = 3;
+}
+
+message NonogramEntity {
+  int32 numErrors = 1;
+  string title = 2;
+  GridEntity currentGrid = 3;
+  GridEntity solution = 4;
+}
+

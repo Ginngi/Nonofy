@@ -1,4 +1,4 @@
-package com.pokedix
+package com.nonofy
 
 object Config {
     const val minSdkVersion = 21

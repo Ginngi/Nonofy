@@ -2,7 +2,12 @@ package com.nonofy.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val Purple200 = Color(0xFFBB86FC)
-val Purple500 = Color(0xFF6200EE)
-val Purple700 = Color(0xFF3700B3)
-val Teal200 = Color(0xFF03DAC5)
+val WhitePaper = Color(0xFFF9FBFF)
+val BlackPaper = Color(0xFF45413C)
+
+val WhitePaperTransparency60 = Color(0x33F9FBFF)
+val BlackPaperTransparency = Color(0x3345413C)
+
+val Blue = Color(0x66b1cfd8)
+val Red = Color(0x66c98e92)
+

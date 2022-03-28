@@ -1,5 +1,5 @@
-import com.pokedix.Config
-import com.pokedix.Libs
+import com.nonofy.Config
+import com.nonofy.Libs
 
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'

@@ -5,8 +5,8 @@ plugins {
     id 'dagger.hilt.android.plugin'
 }
 
-import com.pokedix.Config
-import com.pokedix.Libs
+import com.nonofy.Config
+import com.nonofy.Libs
 
 android {
     compileSdk Config.compileSdkVersion

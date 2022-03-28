@@ -1,6 +1,7 @@
-import com.pokedix.Libs
+import com.nonofy.Libs
 
 apply from: "$rootDir/gradle/android-gradle-conf.gradle"
+apply from: "$rootDir/gradle/proto-gradle-conf.gradle"
 
 dependencies {
     implementation(
@@ -13,6 +14,9 @@ dependencies {
 
     implementation Libs.Hilt.navigation
     implementation Libs.Hilt.viewModel
+
+    implementation Libs.Datastore.core
+    implementation Libs.Datastore.preferences
 
     implementation Libs.Ktx.core
     implementation Libs.Ktx.fragment

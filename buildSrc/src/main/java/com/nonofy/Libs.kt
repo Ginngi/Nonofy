@@ -1,4 +1,4 @@
-package com.pokedix
+package com.nonofy
 
 object Libs {
     object Compose {
@@ -43,6 +43,19 @@ object Libs {
         const val navigation = "androidx.hilt:hilt-navigation-compose:1.0.0-alpha03"
         const val viewModel = "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03"
         const val jetpack = "androidx.hilt:hilt-compiler:1.0.0"
+    }
+
+    object Datastore {
+        private const val version = "1.0.0"
+
+        const val core = "androidx.datastore:datastore:$version"
+        const val preferences = "androidx.datastore:datastore-preferences:$version"
+    }
+
+    object Protobuf {
+        private const val version = "3.0.1"
+
+        const val core = "com.google.protobuf:protobuf-lite:$version"
     }
 
     object JUnit {

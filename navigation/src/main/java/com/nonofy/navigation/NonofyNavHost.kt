@@ -18,7 +18,7 @@ fun NonofyNavHost() {
         }
 
         composable(Destinations.InGame.name) {
-            InGameScreen(inGameViewModel = hiltViewModel())
+            InGameScreen()
         }
     }
 }

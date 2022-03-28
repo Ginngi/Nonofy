@@ -1,4 +1,4 @@
-import com.pokedix.Libs
+import com.nonofy.Libs
 
 apply from: "$rootDir/gradle/android-gradle-conf.gradle"
 
