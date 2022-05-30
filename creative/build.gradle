@@ -1,0 +1,20 @@
+import com.nonofy.Libs
+
+apply from: "$rootDir/gradle/android-gradle-conf.gradle"
+
+dependencies {
+    implementation(
+            project(":ui")
+    )
+
+    implementation Libs.Compose.viewModel
+    implementation Libs.Compose.runtime
+    implementation Libs.Compose.navigation
+
+    implementation Libs.Hilt.navigation
+
+    implementation Libs.Ktx.core
+    implementation Libs.Ktx.fragment
+    implementation Libs.Ktx.viewModel
+    implementation Libs.Ktx.lifecycle
+}

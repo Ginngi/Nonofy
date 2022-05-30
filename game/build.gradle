@@ -11,9 +11,9 @@ dependencies {
     implementation Libs.Compose.viewModel
     implementation Libs.Compose.runtime
     implementation Libs.Compose.navigation
+    implementation Libs.Compose.constraintLayout
 
     implementation Libs.Hilt.navigation
-    implementation Libs.Hilt.viewModel
 
     implementation Libs.Datastore.core
     implementation Libs.Datastore.preferences

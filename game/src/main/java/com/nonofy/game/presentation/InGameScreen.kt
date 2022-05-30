@@ -6,6 +6,7 @@ import androidx.compose.material.AlertDialog
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.tooling.preview.Preview
@@ -15,18 +16,18 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
 import com.nonofy.game.domain.feature.InGameEvent
+import com.nonofy.game.domain.models.Difficulty
 import com.nonofy.game.presentation.components.ingameboard.InGameBoard
 import com.nonofy.game.presentation.components.ingameboard.InGameBoardState
+import com.nonofy.game.presentation.components.lifes.Lifes
 import com.nonofy.ui.components.LoadingContent
 import com.nonofy.ui.components.Screen
 
-@ExperimentalFoundationApi
 @Composable
 fun InGameScreen() {
     InGameScreen(inGameViewModel = hiltViewModel())
 }
 
-@ExperimentalFoundationApi
 @Composable
 private fun InGameScreen(
     lifecycleOwner: LifecycleOwner = LocalLifecycleOwner.current,
@@ -55,13 +56,12 @@ private fun InGameScreen(
     )
 }
 
-@ExperimentalFoundationApi
 @Composable
 private fun InGameScreen(
     viewState: InGameState,
     event: (event: InGameEvent) -> Unit
 ) {
-    Screen(topBarTitle = viewState.title) {
+    Screen {
         if (viewState.isLoading) {
             LoadingContent()
         } else {
@@ -70,16 +70,22 @@ private fun InGameScreen(
     }
 }
 
-@ExperimentalFoundationApi
 @Composable
 private fun InGameNonogramScreen(
     viewState: InGameState,
     event: (event: InGameEvent) -> Unit
 ) {
-    Column(Modifier.padding(8.dp)) {
-        Text(
-            text = "Errors: ${viewState.numErrors}",
-            modifier = Modifier.fillMaxWidth()
+    Column(
+        modifier = Modifier
+            .fillMaxHeight()
+            .padding(8.dp),
+        verticalArrangement = Arrangement.Center
+    ) {
+        Lifes(
+            errors = viewState.numErrors,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 24.dp)
         )
 
         if (viewState.inGameBoardState != null) {
@@ -127,6 +133,6 @@ fun ComposablePreview() {
         numErrors = 0,
         isLoading = false,
         isGameOver = false,
-        inGameBoardState = InGameBoardState.empty(10)
+        inGameBoardState = InGameBoardState.empty(Difficulty.MEDIUM)
     ), event = {})
 }

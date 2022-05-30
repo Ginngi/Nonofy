@@ -12,5 +12,13 @@ message NonogramEntity {
   string title = 2;
   GridEntity currentGrid = 3;
   GridEntity solution = 4;
+
+  enum DifficultyEntity {
+    EASY = 0;
+    MEDIUM = 1;
+    HARD = 2;
+  }
+
+  DifficultyEntity difficulty = 5;
 }
 

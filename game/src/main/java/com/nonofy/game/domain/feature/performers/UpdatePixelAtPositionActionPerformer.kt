@@ -26,7 +26,7 @@ class UpdatePixelAtPositionActionPerformer @Inject constructor(
                         params.nonogram.numErrors
                     }
 
-                if (numErrors >= 3) {
+                if (numErrors >= NUM_LIFES) {
                     emit(InGameEffect.GameOver)
                 } else {
                     emit(
@@ -69,3 +69,5 @@ class UpdatePixelAtPositionActionPerformer @Inject constructor(
 
     data class Params(val nonogram: Nonogram, val indexPixelClicked: Int)
 }
+
+const val NUM_LIFES = 3

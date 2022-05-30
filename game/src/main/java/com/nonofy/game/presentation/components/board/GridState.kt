@@ -1,5 +1,6 @@
 package com.nonofy.game.presentation.components.board
 
+import com.nonofy.game.domain.models.Difficulty
 import com.nonofy.ui.components.pixelbox.PixelState
 
 data class GridState(
@@ -7,9 +8,9 @@ data class GridState(
     val size: Int
 ) {
     companion object {
-        fun empty(size: Int) = GridState(
-            pixels = MutableList(size) { MutableList(size) { PixelState.Empty } },
-            size = size
+        fun empty(difficulty: Difficulty = Difficulty.MEDIUM) = GridState(
+            pixels = MutableList(difficulty.size) { MutableList(difficulty.size) { PixelState.Empty } },
+            size = difficulty.size
         )
     }
 }

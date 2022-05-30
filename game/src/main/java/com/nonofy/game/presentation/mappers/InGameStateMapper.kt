@@ -21,8 +21,9 @@ class InGameStateMapper @Inject constructor(
                 pixels = inGameModel.nonogram.grid.pixels
                     .map { pixelMapper.map(it) }
                     .chunked(inGameModel.nonogram.grid.size),
-                size = inGameModel.nonogram.grid.size
-            )
+                size = inGameModel.nonogram.grid.size,
+            ),
+            difficulty = inGameModel.nonogram.difficulty
         )
     )
 }

@@ -1,24 +1,26 @@
 package com.nonofy.navigation
 
 import androidx.compose.runtime.Composable
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
+import com.nonofy.creative.CreativeScreen
 import com.nonofy.game.presentation.InGameScreen
-import com.nonofy.home.HomeScreen
+import com.nonofy.home.presentation.HomeScreen
 
 @Composable
-fun NonofyNavHost() {
-    val navController = rememberNavController()
-
-    NavHost(navController = navController, startDestination = Destinations.InGame.name) {
+fun NonofyNavHost(navController: NavHostController) {
+    NavHost(navController = navController, startDestination = Destinations.Home.name) {
         composable(Destinations.Home.name) {
-            HomeScreen(viewModel = hiltViewModel())
+            HomeScreen()
         }
 
         composable(Destinations.InGame.name) {
             InGameScreen()
+        }
+
+        composable(Destinations.Creative.name) {
+            CreativeScreen()
         }
     }
 }

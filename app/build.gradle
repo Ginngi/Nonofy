@@ -43,22 +43,22 @@ android {
         useIR = true
     }
 
-    buildFeatures {
-        compose true
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.1.1"
     }
 
-    composeOptions {
-        kotlinCompilerVersion = "1.5.31"
-        kotlinCompilerExtensionVersion = "1.0.4"
+    buildFeatures {
+        compose true
     }
 }
 
 dependencies {
     implementation(
-            project(":ui"),
             project(":navigation"),
             project(":game"),
-            project(":home")
+            project(":home"),
+            project(":creative"),
+            project(":ui"),
     )
 
     implementation Libs.Material.core

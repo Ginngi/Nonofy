@@ -6,12 +6,12 @@ dependencies {
     implementation(
             project(":home"),
             project(":game"),
+            project(":creative"),
     )
 
     api Libs.Compose.navigation
 
     api Libs.Hilt.navigation
-    api Libs.Hilt.viewModel
 
     implementation Libs.Ktx.core
     implementation Libs.Ktx.fragment

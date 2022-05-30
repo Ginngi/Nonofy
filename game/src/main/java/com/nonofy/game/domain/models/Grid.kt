@@ -7,10 +7,10 @@ data class Grid(
     val size: Int
 ) {
     companion object {
-        fun empty(size: Int = 10) = Grid(
-            pixels = MutableList(size * size) { Pixel.EMPTY },
+        fun empty(difficulty: Difficulty = Difficulty.MEDIUM) = Grid(
+            pixels = MutableList(difficulty.size * difficulty.size) { Pixel.EMPTY },
             numFilledPixels = 0,
-            size = size
+            size = difficulty.size,
         )
     }
 }

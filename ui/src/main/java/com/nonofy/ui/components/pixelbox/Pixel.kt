@@ -1,38 +1,42 @@
 package com.nonofy.ui.components.pixelbox
 
+import android.os.Vibrator
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import com.nonofy.ui.theme.BlackPaperTransparency
-import com.nonofy.ui.theme.Blue
-import com.nonofy.ui.theme.Red
-import com.nonofy.ui.theme.WhitePaperTransparency60
+import androidx.core.content.ContextCompat.getSystemService
+import com.nonofy.ui.theme.BlackJapanese
+import com.nonofy.ui.theme.RedJapanese
+import com.nonofy.ui.theme.WhiteJapanese
 
 @Composable
 fun Pixel(
     onClickPixel: () -> Unit,
     state: PixelState,
     modifier: Modifier = Modifier,
-    isDarkThemeEnabled: Boolean = isSystemInDarkTheme()
 ) {
+    val context = LocalContext.current
+    val vibrator: Vibrator = getSystemService(context, Vibrator::class.java) as Vibrator
+
     Box(modifier = modifier
-        .background(getColorFromState(state, isDarkThemeEnabled))
+        .background(getColorFromState(state))
         .aspectRatio(1f)
-        .clickable { onClickPixel() }
+        .clickable(enabled = state == PixelState.Empty) {
+            vibrator.vibrate(150)
+            onClickPixel()
+        }
     )
 }
 
-private fun getColorFromState(state: PixelState, isDarkThemeEnabled: Boolean) = when (state) {
-    PixelState.Filled -> Blue
-    PixelState.Empty -> if (isDarkThemeEnabled) WhitePaperTransparency60 else BlackPaperTransparency
-    PixelState.Failed -> Red
+private fun getColorFromState(state: PixelState) = when (state) {
+    PixelState.Filled -> RedJapanese
+    PixelState.Empty -> WhiteJapanese
+    PixelState.Failed -> BlackJapanese
 }
 
 @Preview

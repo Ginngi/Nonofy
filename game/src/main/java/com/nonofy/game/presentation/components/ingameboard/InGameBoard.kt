@@ -7,69 +7,83 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.constraintlayout.compose.Dimension
 import com.nonofy.game.domain.feature.InGameEvent
+import com.nonofy.game.domain.models.Difficulty
 import com.nonofy.game.presentation.components.board.Grid
 import com.nonofy.game.presentation.components.headers.HorizontalBoardHeader
 import com.nonofy.game.presentation.components.headers.VerticalBoardHeader
 
-@ExperimentalFoundationApi
 @Composable
 fun InGameBoard(
     inGameBoardState: InGameBoardState,
-    event: (InGameEvent) -> Unit,
-    modifier: Modifier = Modifier
+    event: (InGameEvent) -> Unit
 ) {
-    Column(
-        horizontalAlignment = Alignment.End,
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(4.dp)
-    ) {
+    ConstraintLayout {
+        val (verticalHeader, horizontalHeader, grid) = createRefs()
+
         Row(
             Modifier
                 .height(IntrinsicSize.Max)
-                .fillMaxWidth(0.85f),
-            verticalAlignment = Alignment.Bottom
+                .padding(bottom = 4.dp)
+                .constrainAs(horizontalHeader) {
+                    top.linkTo(parent.top)
+                    start.linkTo(grid.start)
+                    end.linkTo(grid.end)
+                    width = Dimension.fillToConstraints
+                },
+            verticalAlignment = Alignment.Bottom,
+            horizontalArrangement = Arrangement.spacedBy(1.dp)
         ) {
             inGameBoardState.verticalHeader.forEach { header ->
                 VerticalBoardHeader(
                     header = header,
+                    difficulty = inGameBoardState.difficulty,
                     modifier = Modifier
                         .weight(1f)
-                        .padding(1.dp)
                         .fillMaxHeight()
                 )
             }
         }
 
-        Row(
+        Column(
             Modifier
-                .fillMaxWidth()
-                .height(IntrinsicSize.Max)
+                .width(IntrinsicSize.Max)
+                .padding(end = 4.dp)
+                .constrainAs(verticalHeader) {
+                    start.linkTo(parent.start)
+                    top.linkTo(grid.top)
+                    bottom.linkTo(grid.bottom)
+                    height = Dimension.fillToConstraints
+                },
+            horizontalAlignment = Alignment.End,
+            verticalArrangement = Arrangement.spacedBy(1.dp)
         ) {
-            Column(
-                Modifier
-                    .weight(0.15f)
-                    .width(IntrinsicSize.Max),
-                horizontalAlignment = Alignment.End
-            ) {
-                inGameBoardState.horizontalHeader.forEach { header ->
-                    HorizontalBoardHeader(
-                        header = header,
-                        modifier = Modifier
-                            .padding(1.dp)
-                            .weight(1f)
-                            .fillMaxWidth()
-                    )
-                }
+            inGameBoardState.horizontalHeader.forEach { header ->
+                HorizontalBoardHeader(
+                    header = header,
+                    difficulty = inGameBoardState.difficulty,
+                    modifier = Modifier
+                        .weight(1f)
+                        .fillMaxHeight()
+                        .fillMaxWidth()
+                )
             }
-
-            Grid(
-                state = inGameBoardState.gridState,
-                event = { event(it) },
-                modifier = Modifier.weight(0.85f)
-            )
         }
+
+        Grid(
+            state = inGameBoardState.gridState,
+            event = { event(it) },
+            modifier = Modifier
+                .constrainAs(grid) {
+                    top.linkTo(horizontalHeader.bottom)
+                    end.linkTo(parent.end)
+                    start.linkTo(verticalHeader.end)
+                    width = Dimension.preferredWrapContent
+                }
+        )
+
     }
 }
 
@@ -77,5 +91,8 @@ fun InGameBoard(
 @Preview
 @Composable
 fun Preview() {
-    InGameBoard(inGameBoardState = InGameBoardState.empty(10), event = { InGameEvent.ResetBoard })
+    InGameBoard(
+        inGameBoardState = InGameBoardState.empty(Difficulty.MEDIUM),
+        event = { InGameEvent.ResetBoard }
+    )
 }
