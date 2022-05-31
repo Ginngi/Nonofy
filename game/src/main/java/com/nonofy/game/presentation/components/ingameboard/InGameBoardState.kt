@@ -1,7 +1,7 @@
 package com.nonofy.game.presentation.components.ingameboard
 
 import com.nonofy.game.domain.models.Difficulty
-import com.nonofy.game.presentation.components.board.GridState
+import com.nonofy.ui.components.grid.GridState
 
 data class InGameBoardState constructor(
     val horizontalHeader: List<String>,
@@ -14,7 +14,7 @@ data class InGameBoardState constructor(
             verticalHeader = MutableList(difficulty.size) { "1,1,1,1" },
             horizontalHeader = MutableList(difficulty.size) { "1,1,1,1" },
             difficulty = difficulty,
-            gridState = GridState.empty(difficulty)
+            gridState = GridState.empty(difficulty.size)
         )
     }
 }

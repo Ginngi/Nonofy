@@ -1,4 +1,4 @@
-package com.nonofy.game.presentation.components.board
+package com.nonofy.ui.components.grid
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
@@ -10,16 +10,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.nonofy.game.domain.feature.InGameEvent
-import com.nonofy.game.domain.models.Difficulty
-import com.nonofy.ui.components.pixelbox.Pixel
+import com.nonofy.ui.components.pixel.Pixel
 import com.nonofy.ui.theme.RedJapanese
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun Grid(
     state: GridState,
-    event: (InGameEvent) -> Unit,
+    onPixelClicked: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
     LazyVerticalGrid(
@@ -31,7 +29,7 @@ fun Grid(
         itemsIndexed(state.pixels.flatten()) { index, pixelState ->
             Pixel(
                 state = pixelState,
-                onClickPixel = { event(InGameEvent.OnPixelClicked(index)) },
+                onClickPixel = { onPixelClicked(index) },
                 modifier = Modifier.border(0.5.dp, RedJapanese)
             )
         }
@@ -42,7 +40,7 @@ fun Grid(
 @Composable
 fun ComposablePreview() {
     Grid(
-        state = GridState.empty(Difficulty.MEDIUM),
-        event = { InGameEvent.ResetBoard }
+        state = GridState.empty(),
+        onPixelClicked = {}
     )
 }

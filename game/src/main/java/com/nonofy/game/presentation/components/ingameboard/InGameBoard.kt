@@ -11,7 +11,7 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import com.nonofy.game.domain.feature.InGameEvent
 import com.nonofy.game.domain.models.Difficulty
-import com.nonofy.game.presentation.components.board.Grid
+import com.nonofy.ui.components.grid.Grid
 import com.nonofy.game.presentation.components.headers.HorizontalBoardHeader
 import com.nonofy.game.presentation.components.headers.VerticalBoardHeader
 
@@ -74,7 +74,9 @@ fun InGameBoard(
 
         Grid(
             state = inGameBoardState.gridState,
-            event = { event(it) },
+            onPixelClicked = { position ->
+                event(InGameEvent.OnPixelClicked(position))
+            },
             modifier = Modifier
                 .constrainAs(grid) {
                     top.linkTo(horizontalHeader.bottom)

@@ -2,7 +2,7 @@ package com.nonofy.game.presentation.mappers
 
 import com.nonofy.game.domain.feature.InGameModel
 import com.nonofy.game.presentation.InGameState
-import com.nonofy.game.presentation.components.board.GridState
+import com.nonofy.ui.components.grid.GridState
 import com.nonofy.game.presentation.components.ingameboard.InGameBoardState
 import javax.inject.Inject
 

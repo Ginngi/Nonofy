@@ -1,4 +1,4 @@
-package com.nonofy.ui.components.pixelbox
+package com.nonofy.ui.components.pixel
 
 sealed class PixelState {
     object Filled: PixelState()

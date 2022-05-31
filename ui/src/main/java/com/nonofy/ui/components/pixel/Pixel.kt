@@ -1,4 +1,4 @@
-package com.nonofy.ui.components.pixelbox
+package com.nonofy.ui.components.pixel
 
 import android.os.Vibrator
 import androidx.compose.foundation.background
