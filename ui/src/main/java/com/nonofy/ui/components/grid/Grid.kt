@@ -26,7 +26,7 @@ fun Grid(
             .border(5.dp, RedJapanese),
         cells = GridCells.Fixed(state.size)
     ) {
-        itemsIndexed(state.pixels.flatten()) { index, pixelState ->
+        itemsIndexed(state.pixels) { index, pixelState ->
             Pixel(
                 state = pixelState,
                 onClickPixel = { onPixelClicked(index) },
