@@ -8,7 +8,13 @@ class CreativeReducer @Inject constructor() : Reducer<CreativeEffect, CreativeSc
     override fun reduce(
         effect: CreativeEffect,
         oldModel: CreativeScreenState
-    ): CreativeScreenState {
-        TODO("Not yet implemented")
+    ): CreativeScreenState = when (effect) {
+        is CreativeEffect.UpdatePixelAtPosition -> oldModel.copy(
+            gridState = oldModel.gridState.copy(
+                pixels = oldModel.gridState.pixels.toMutableList().apply {
+                    this[effect.position] = effect.newPixelState
+                }
+            )
+        )
     }
 }

@@ -18,6 +18,7 @@ import com.nonofy.ui.theme.RedJapanese
 fun Grid(
     state: GridState,
     onPixelClicked: (Int) -> Unit,
+    pixelClickWhenFilledEnabled: Boolean = false,
     modifier: Modifier = Modifier
 ) {
     LazyVerticalGrid(

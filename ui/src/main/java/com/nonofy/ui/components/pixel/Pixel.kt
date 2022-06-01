@@ -1,5 +1,7 @@
 package com.nonofy.ui.components.pixel
 
+import android.os.Build
+import android.os.VibrationEffect
 import android.os.Vibrator
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -19,6 +21,7 @@ fun Pixel(
     onClickPixel: () -> Unit,
     state: PixelState,
     modifier: Modifier = Modifier,
+    pixelClickWhenFilledEnabled: Boolean = false,
 ) {
     val context = LocalContext.current
     val vibrator: Vibrator = getSystemService(context, Vibrator::class.java) as Vibrator
@@ -26,8 +29,17 @@ fun Pixel(
     Box(modifier = modifier
         .background(getColorFromState(state))
         .aspectRatio(1f)
-        .clickable(enabled = state == PixelState.Empty) {
-            vibrator.vibrate(150)
+        .clickable(enabled = !(state != PixelState.Empty && pixelClickWhenFilledEnabled)) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                vibrator.vibrate(
+                    VibrationEffect.createOneShot(
+                        100,
+                        VibrationEffect.DEFAULT_AMPLITUDE
+                    )
+                )
+            } else {
+                vibrator.vibrate(100)
+            }
             onClickPixel()
         }
     )

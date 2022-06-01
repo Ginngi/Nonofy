@@ -7,7 +7,10 @@ import com.nonofy.game.data.proto.GameEntity
 import com.nonofy.game.data.serializer.NonogramEntitySerializer
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onEmpty
+import java.io.IOException
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -21,11 +24,13 @@ class GameCacheDataSource @Inject constructor(
     )
 
     fun loadGame(): Flow<GameEntity.NonogramEntity> =
-        context.gameDataStore.data
+        context.gameDataStore.data.catch { exception ->
+            if (exception is IOException ) {
 
-    fun hasGameSaved(): Flow<Boolean> = context.gameDataStore.data.map {
-        it.currentGrid.pixelsList.isNotEmpty()
-    }
+            } else {
+
+            }
+        }
 
     suspend fun saveGame(game: GameEntity.NonogramEntity) {
         context.gameDataStore.updateData {
