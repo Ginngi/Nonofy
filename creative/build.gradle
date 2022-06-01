@@ -4,7 +4,8 @@ apply from: "$rootDir/gradle/android-gradle-conf.gradle"
 
 dependencies {
     implementation(
-            project(":ui")
+            project(":ui"),
+            project(":utils")
     )
 
     implementation Libs.Compose.viewModel

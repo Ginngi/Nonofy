@@ -1,10 +1,10 @@
 package com.nonofy.game.domain.feature
 
-import com.nonofy.game.domain.Feature
 import com.nonofy.game.domain.feature.performers.LoadGameActionPerformer
 import com.nonofy.game.domain.feature.performers.ResetBoardActionPerformer
 import com.nonofy.game.domain.feature.performers.SaveGameActionPerformer
 import com.nonofy.game.domain.feature.performers.UpdatePixelAtPositionActionPerformer
+import com.nonofy.utils.Feature
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import javax.inject.Inject

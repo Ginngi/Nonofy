@@ -35,6 +35,10 @@ object Libs {
         const val fragment = "androidx.fragment:fragment-ktx:1.3.6"
     }
 
+    object Coroutines {
+        const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2"
+    }
+
     object Hilt {
         const val version = "2.42"
 

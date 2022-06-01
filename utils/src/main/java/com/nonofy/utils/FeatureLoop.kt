@@ -1,4 +1,4 @@
-package com.nonofy.game.domain
+package com.nonofy.utils
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi

@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.nonofy.creative.CreativeScreen
+import com.nonofy.creative.creativeGraph
 import com.nonofy.game.presentation.InGameScreen
 import com.nonofy.home.presentation.HomeScreen
 
@@ -19,8 +19,6 @@ fun NonofyNavHost(navController: NavHostController) {
             InGameScreen()
         }
 
-        composable(Destinations.Creative.name) {
-            CreativeScreen()
-        }
+        creativeGraph(navController, Destinations.Creative.name)
     }
 }

@@ -1,9 +1,9 @@
 package com.nonofy.game.domain.feature.performers
 
-import com.nonofy.game.domain.Performer
 import com.nonofy.game.domain.feature.InGameEffect
 import com.nonofy.game.domain.models.Nonogram
 import com.nonofy.game.domain.models.Pixel
+import com.nonofy.utils.Performer
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
