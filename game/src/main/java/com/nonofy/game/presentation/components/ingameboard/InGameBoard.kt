@@ -1,7 +1,15 @@
 package com.nonofy.game.presentation.components.ingameboard
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -11,9 +19,9 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import com.nonofy.game.domain.feature.InGameEvent
 import com.nonofy.game.domain.models.Difficulty
-import com.nonofy.ui.components.grid.Grid
 import com.nonofy.game.presentation.components.headers.HorizontalBoardHeader
 import com.nonofy.game.presentation.components.headers.VerticalBoardHeader
+import com.nonofy.ui.components.grid.Grid
 
 @Composable
 fun InGameBoard(

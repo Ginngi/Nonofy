@@ -57,9 +57,10 @@ object Libs {
     }
 
     object Protobuf {
-        private const val version = "3.20.0"
+        private const val version = "3.20.1"
 
         const val core = "com.google.protobuf:protobuf-javalite:$version"
+        const val kotlin = "com.google.protobuf:protobuf-kotlin-lite:$version"
     }
 
     object JUnit {

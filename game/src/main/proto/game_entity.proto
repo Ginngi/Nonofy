@@ -1,4 +1,5 @@
 syntax = "proto3";
+
 package com.nonofy.game.data.proto;
 
 message GridEntity {
@@ -7,11 +8,18 @@ message GridEntity {
   int32 numFilledPixels = 3;
 }
 
+message HeaderEntity {
+  string value = 1;
+  bool isCompleted = 2;
+}
+
 message NonogramEntity {
   int32 numErrors = 1;
   string title = 2;
   GridEntity currentGrid = 3;
   GridEntity solution = 4;
+  repeated HeaderEntity verticalHeaders = 6;
+  repeated HeaderEntity horizontalHeaders = 7;
 
   enum DifficultyEntity {
     EASY = 0;

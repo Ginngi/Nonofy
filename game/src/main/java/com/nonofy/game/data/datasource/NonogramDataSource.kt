@@ -2,30 +2,12 @@ package com.nonofy.game.data.datasource
 
 import com.nonofy.game.domain.models.Difficulty
 import com.nonofy.game.domain.models.Grid
+import com.nonofy.game.domain.models.Header
 import com.nonofy.game.domain.models.Nonogram
 import com.nonofy.game.domain.models.Pixel
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class NonogramDataSource @Inject constructor() {
-    fun test(difficulty: Difficulty): Flow<Nonogram> = flow {
-        emit(
-            Nonogram.empty(
-                title = "Test Game",
-                numErrors = 0,
-                grid = Grid.empty(difficulty),
-                solution = Grid(
-                    pixels = MutableList(difficulty.size * difficulty.size) {
-                        if (it % 2 == 0) Pixel.FILLED else Pixel.EMPTY
-                    },
-                    numFilledPixels = (difficulty.size * difficulty.size) / 2,
-                    size = difficulty.size,
-                ),
-            )
-        )
-    }
-
     fun kostasGame(): Nonogram {
         val difficulty = Difficulty.HARD
         val specialGrid =
@@ -42,15 +24,90 @@ class NonogramDataSource @Inject constructor() {
             }
         }
 
+        val solution = Grid(
+            pixels = pixels,
+            numFilledPixels = numFilled,
+            size = difficulty.size,
+        )
+
         return Nonogram.empty(
             title = "Kostas Special Game",
             numErrors = 0,
             grid = Grid.empty(difficulty),
-            solution = Grid(
-                pixels = pixels,
-                numFilledPixels = numFilled,
-                size = difficulty.size,
-            ),
+            verticalHeaders = generateVerticalHeadersFromGrid(solution),
+            horizontalHeaders = generateHorizontalHeadersFromGrid(solution),
+            solution = solution,
+            difficulty = Difficulty.HARD
         )
+    }
+
+    private fun generateVerticalHeadersFromGrid(grid: Grid): List<Header> {
+        val verticalHeaders: MutableList<Header> = mutableListOf()
+
+        for (i in 0 until grid.size) {
+            val column = grid.pixels.slice(i until grid.pixels.size step grid.size)
+            val header: MutableList<Int> = mutableListOf()
+            var numFilledPixel = 0
+
+            column.forEach {
+                if (it == Pixel.FILLED) {
+                    numFilledPixel += 1
+                } else {
+                    if (numFilledPixel != 0) {
+                        header.add(numFilledPixel)
+                        numFilledPixel = 0
+                    }
+                }
+            }
+
+            if (numFilledPixel != 0) {
+                header.add(numFilledPixel)
+                numFilledPixel = 0
+            }
+
+            verticalHeaders.add(
+                Header(
+                    value = header.joinToString(separator = ","),
+                    isCompleted = false
+                )
+            )
+            header.clear()
+        }
+
+        return verticalHeaders
+    }
+
+    private fun generateHorizontalHeadersFromGrid(grid: Grid): List<Header> {
+        val horizontalHeaders: MutableList<Header> = mutableListOf()
+
+        var numFilledPixel = 0
+        val header: MutableList<Int> = mutableListOf()
+
+        grid.pixels.forEachIndexed { index, pixel ->
+            if (pixel == Pixel.FILLED) {
+                numFilledPixel += 1
+            } else {
+                if (numFilledPixel != 0) {
+                    header.add(numFilledPixel)
+                    numFilledPixel = 0
+                }
+            }
+
+            if ((index + 1) % grid.size == 0) {
+                if (numFilledPixel != 0) {
+                    header.add(numFilledPixel)
+                    numFilledPixel = 0
+                }
+                horizontalHeaders.add(
+                    Header(
+                        value = header.joinToString(separator = ","),
+                        isCompleted = false
+                    )
+                )
+                header.clear()
+            }
+        }
+
+        return horizontalHeaders
     }
 }

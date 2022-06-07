@@ -1,11 +1,8 @@
 package com.nonofy.game.presentation.components.headers
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -18,7 +15,7 @@ import com.nonofy.game.domain.models.Difficulty
 
 @Composable
 fun VerticalBoardHeader(
-    header: String,
+    header: HeaderState,
     difficulty: Difficulty,
     modifier: Modifier = Modifier
 ) {
@@ -29,7 +26,7 @@ fun VerticalBoardHeader(
             .clip(RoundedCornerShape(2.dp)),
         verticalArrangement = Arrangement.Bottom
     ) {
-        val headerList = header.split(',')
+        val headerList = header.value.split(',')
 
         for (item in headerList) {
             Text(
@@ -43,5 +40,5 @@ fun VerticalBoardHeader(
 @Composable
 @Preview(showBackground = true)
 private fun DefaultPreview() {
-    VerticalBoardHeader("1,1,2,10", Difficulty.MEDIUM)
+    VerticalBoardHeader(HeaderState.empty(), Difficulty.MEDIUM)
 }

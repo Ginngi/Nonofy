@@ -5,8 +5,8 @@ data class Nonogram(
     val numErrors: Int,
     val grid: Grid,
     val solution: Grid,
-    val verticalHeaders: List<String>,
-    val horizontalHeaders: List<String>,
+    val verticalHeaders: List<Header>,
+    val horizontalHeaders: List<Header>,
     val difficulty: Difficulty
 ) {
     companion object {
@@ -15,8 +15,8 @@ data class Nonogram(
             numErrors: Int = 0,
             grid: Grid = Grid.empty(),
             solution: Grid = Grid.empty(),
-            verticalHeaders: List<String> = MutableList(10) { "1,1,1" },
-            horizontalHeaders: List<String> = MutableList(10) { "1,2,3" },
+            verticalHeaders: List<Header> = MutableList(Difficulty.MEDIUM.size) { Header.empty() },
+            horizontalHeaders: List<Header> = MutableList(Difficulty.MEDIUM.size) { Header.empty() },
             difficulty: Difficulty = Difficulty.MEDIUM
         ) = Nonogram(
             title = title,

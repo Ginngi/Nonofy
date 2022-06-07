@@ -19,7 +19,7 @@ class ResetBoardActionPerformer @Inject constructor(
                     numErrors = 0,
                     grid = params.nonogram.grid.copy(
                         numFilledPixels = 0,
-                        pixels = Grid.empty().pixels
+                        pixels = Grid.empty(params.nonogram.difficulty).pixels
                     )
                 )
             )

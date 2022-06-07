@@ -7,7 +7,8 @@ import com.nonofy.ui.components.grid.GridState
 import javax.inject.Inject
 
 class InGameStateMapper @Inject constructor(
-    private val pixelMapper: PixelStateMapper
+    private val pixelMapper: PixelStateMapper,
+    private val headerStateMapper: HeaderStateMapper
 ) {
     fun map(inGameModel: InGameModel): InGameState = InGameState(
         title = inGameModel.nonogram.title,
@@ -15,8 +16,8 @@ class InGameStateMapper @Inject constructor(
         isLoading = inGameModel.isLoading,
         isGameOver = inGameModel.isGameOver,
         inGameBoardState = InGameBoardState(
-            horizontalHeader = inGameModel.nonogram.horizontalHeaders,
-            verticalHeader = inGameModel.nonogram.verticalHeaders,
+            horizontalHeader = inGameModel.nonogram.horizontalHeaders.map { headerStateMapper.map(it) },
+            verticalHeader = inGameModel.nonogram.verticalHeaders.map { headerStateMapper.map(it) },
             gridState = GridState(
                 pixels = inGameModel.nonogram.grid.pixels
                     .map { pixelMapper.map(it) },

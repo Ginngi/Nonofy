@@ -3,7 +3,15 @@ package com.nonofy.utils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.BufferOverflow
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.merge
+import kotlinx.coroutines.flow.stateIn
 
 abstract class Performer<PARAM : Any, EFFECT : Any> {
     // Ideally this would be buffer = 0, since we use flatMapLatest below, BUT invoke is not
@@ -18,9 +26,7 @@ abstract class Performer<PARAM : Any, EFFECT : Any> {
 
     @ExperimentalCoroutinesApi
     val flow: Flow<EFFECT> = paramState
-        .distinctUntilChanged()
         .flatMapLatest { createObservable(it) }
-        .distinctUntilChanged()
 
     operator fun invoke(params: PARAM) {
         paramState.tryEmit(params)
@@ -42,6 +48,7 @@ abstract class Feature<MODEL, EVENT, EFFECT>(
     private val _model: Flow<MODEL> = actionPerformers.asIterable()
         .merge()
         .map { reducer.reduce(it, model.value) }
+        .distinctUntilChanged()
 
     val model: StateFlow<MODEL> = _model
         .stateIn(scope, SharingStarted.Lazily, initialValue)
