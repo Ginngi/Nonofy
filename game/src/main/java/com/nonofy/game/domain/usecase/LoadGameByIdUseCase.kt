@@ -9,5 +9,5 @@ class LoadGameByIdUseCase @Inject constructor(
     private val repository: GameRepository
 ) {
     fun run(): Flow<Nonogram> =
-        repository.loadGame()
+        repository.loadGameById()
 }

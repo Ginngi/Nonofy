@@ -1,5 +1,6 @@
 package com.nonofy.ui.components.pixel
 
+import android.content.Context
 import android.os.Build
 import android.os.VibrationEffect
 import android.os.Vibrator
@@ -24,22 +25,11 @@ fun Pixel(
     pixelClickWhenFilledEnabled: Boolean = false,
 ) {
     val context = LocalContext.current
-    val vibrator: Vibrator = getSystemService(context, Vibrator::class.java) as Vibrator
-
     Box(modifier = modifier
         .background(getColorFromState(state))
         .aspectRatio(1f)
         .clickable(enabled = !(state != PixelState.Empty && pixelClickWhenFilledEnabled)) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                vibrator.vibrate(
-                    VibrationEffect.createOneShot(
-                        100,
-                        VibrationEffect.DEFAULT_AMPLITUDE
-                    )
-                )
-            } else {
-                vibrator.vibrate(100)
-            }
+            vibrate(context)
             onClickPixel()
         }
     )
@@ -49,6 +39,21 @@ private fun getColorFromState(state: PixelState) = when (state) {
     PixelState.Filled -> RedJapanese
     PixelState.Empty -> WhiteJapanese
     PixelState.Failed -> BlackJapanese
+}
+
+private fun vibrate(context: Context) {
+    val vibrator: Vibrator = getSystemService(context, Vibrator::class.java) as Vibrator
+
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        vibrator.vibrate(
+            VibrationEffect.createOneShot(
+                80,
+                VibrationEffect.DEFAULT_AMPLITUDE
+            )
+        )
+    } else {
+        vibrator.vibrate(80)
+    }
 }
 
 @Preview

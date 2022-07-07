@@ -23,4 +23,7 @@ dependencies {
     implementation Libs.Ktx.fragment
     implementation Libs.Ktx.viewModel
     implementation Libs.Ktx.lifecycle
+
+    testImplementation Libs.JUnit.core
+    testImplementation Libs.Truth.core
 }

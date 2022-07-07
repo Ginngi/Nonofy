@@ -10,7 +10,7 @@ import javax.inject.Inject
 class NonogramDataSource @Inject constructor() {
     fun easyTest(): Nonogram {
         val difficulty = Difficulty.EASY
-        val specialGrid = List(difficulty.size) { if (it == 0) "1" else "0" }
+        val specialGrid = List(difficulty.size * difficulty.size) { if (it == 0 || it == 1) "1" else "0" }
 
         val numFilled = specialGrid.count { it == "1" }
 
@@ -96,12 +96,21 @@ class NonogramDataSource @Inject constructor() {
                 numFilledPixel = 0
             }
 
-            verticalHeaders.add(
-                Header(
-                    value = header.joinToString(separator = ","),
-                    isCompleted = false
+            if (header.isEmpty()) {
+                verticalHeaders.add(
+                    Header(
+                        value = "0",
+                        isCompleted = true
+                    )
                 )
-            )
+            } else {
+                verticalHeaders.add(
+                    Header(
+                        value = header.joinToString(separator = ","),
+                        isCompleted = false
+                    )
+                )
+            }
             header.clear()
         }
 
@@ -129,12 +138,23 @@ class NonogramDataSource @Inject constructor() {
                     header.add(numFilledPixel)
                     numFilledPixel = 0
                 }
-                horizontalHeaders.add(
-                    Header(
-                        value = header.joinToString(separator = ","),
-                        isCompleted = false
+
+                if (header.isEmpty()) {
+                    horizontalHeaders.add(
+                        Header(
+                            value = "0",
+                            isCompleted = true
+                        )
                     )
-                )
+                } else {
+                    horizontalHeaders.add(
+                        Header(
+                            value = header.joinToString(separator = ","),
+                            isCompleted = false
+                        )
+                    )
+                }
+
                 header.clear()
             }
         }

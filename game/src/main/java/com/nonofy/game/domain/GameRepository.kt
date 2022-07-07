@@ -4,7 +4,7 @@ import com.nonofy.game.domain.models.Nonogram
 import kotlinx.coroutines.flow.Flow
 
 interface GameRepository {
-    fun loadGame(): Flow<Nonogram>
-
+    fun loadGameById(): Flow<Nonogram>
+    fun loadSavedGame(): Flow<Nonogram>
     suspend fun saveGame(nonogram: Nonogram)
 }

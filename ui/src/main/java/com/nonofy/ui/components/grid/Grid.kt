@@ -16,10 +16,10 @@ import com.nonofy.ui.theme.RedJapanese
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun Grid(
+    modifier: Modifier = Modifier,
     state: GridState,
     onPixelClicked: (Int) -> Unit,
     pixelClickWhenFilledEnabled: Boolean = false,
-    modifier: Modifier = Modifier
 ) {
     LazyVerticalGrid(
         modifier = modifier
@@ -31,7 +31,8 @@ fun Grid(
             Pixel(
                 state = pixelState,
                 onClickPixel = { onPixelClicked(index) },
-                modifier = Modifier.border(0.5.dp, RedJapanese)
+                modifier = Modifier.border(0.5.dp, RedJapanese),
+                pixelClickWhenFilledEnabled = pixelClickWhenFilledEnabled
             )
         }
     }
