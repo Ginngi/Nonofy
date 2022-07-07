@@ -15,6 +15,7 @@ class InGameStateMapper @Inject constructor(
         numErrors = inGameModel.nonogram.numErrors,
         isLoading = inGameModel.isLoading,
         isGameOver = inGameModel.isGameOver,
+        isCompletedSuccessfully = inGameModel.isCompletedSuccessfully,
         inGameBoardState = InGameBoardState(
             horizontalHeader = inGameModel.nonogram.horizontalHeaders.map { headerStateMapper.map(it) },
             verticalHeader = inGameModel.nonogram.verticalHeaders.map { headerStateMapper.map(it) },

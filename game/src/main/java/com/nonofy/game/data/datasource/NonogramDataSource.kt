@@ -8,6 +8,37 @@ import com.nonofy.game.domain.models.Pixel
 import javax.inject.Inject
 
 class NonogramDataSource @Inject constructor() {
+    fun easyTest(): Nonogram {
+        val difficulty = Difficulty.EASY
+        val specialGrid = List(difficulty.size) { if (it == 0) "1" else "0" }
+
+        val numFilled = specialGrid.count { it == "1" }
+
+        val pixels = specialGrid.map {
+            if (it == "1") {
+                Pixel.FILLED
+            } else {
+                Pixel.EMPTY
+            }
+        }
+
+        val solution = Grid(
+            pixels = pixels,
+            numFilledPixels = numFilled,
+            size = difficulty.size,
+        )
+
+        return Nonogram.empty(
+            title = "Easy Game",
+            numErrors = 0,
+            grid = Grid.empty(difficulty),
+            verticalHeaders = generateVerticalHeadersFromGrid(solution),
+            horizontalHeaders = generateHorizontalHeadersFromGrid(solution),
+            solution = solution,
+            difficulty = difficulty
+        )
+    }
+
     fun kostasGame(): Nonogram {
         val difficulty = Difficulty.HARD
         val specialGrid =
@@ -37,7 +68,7 @@ class NonogramDataSource @Inject constructor() {
             verticalHeaders = generateVerticalHeadersFromGrid(solution),
             horizontalHeaders = generateHorizontalHeadersFromGrid(solution),
             solution = solution,
-            difficulty = Difficulty.HARD
+            difficulty = difficulty
         )
     }
 

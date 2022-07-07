@@ -26,11 +26,17 @@ class UpdatePixelAtPositionActionPerformer @Inject constructor(
                         params.nonogram.numErrors
                     }
 
-                if (numErrors >= NUM_LIFES) {
-                    emit(InGameEffect.GameOver)
+                val numFilledPixels = if (newPixel == Pixel.FILLED) {
+                    params.nonogram.grid.numFilledPixels + 1
                 } else {
-                    emit(
-                        InGameEffect.GameLoaded(
+                    params.nonogram.grid.numFilledPixels
+                }
+
+                emit(
+                    when {
+                        numErrors >= NUM_LIFES -> InGameEffect.GameOver
+                        numFilledPixels == params.nonogram.solution.numFilledPixels -> InGameEffect.CompletedSuccessfully
+                        else -> InGameEffect.GameLoaded(
                             nonogram = params.nonogram.copy(
                                 numErrors = numErrors,
                                 grid = params.nonogram.grid.copy(
@@ -43,8 +49,8 @@ class UpdatePixelAtPositionActionPerformer @Inject constructor(
                                 ),
                             )
                         )
-                    )
-                }
+                    }
+                )
             }
             else -> emit(InGameEffect.GameLoaded(params.nonogram))
         }

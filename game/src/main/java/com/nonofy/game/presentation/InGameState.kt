@@ -7,6 +7,7 @@ data class InGameState(
     val numErrors: Int = 0,
     val isLoading: Boolean = false,
     val isGameOver: Boolean = false,
+    val isCompletedSuccessfully: Boolean = false,
     val inGameBoardState: InGameBoardState? = null
 ) {
     companion object {

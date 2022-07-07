@@ -1,12 +1,20 @@
 package com.nonofy.game.presentation
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.AlertDialog
 import androidx.compose.material.Button
 import androidx.compose.material.Text
-import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.tooling.preview.Preview
@@ -97,6 +105,7 @@ private fun InGameNonogramScreen(
     }
 
     if (viewState.isGameOver) GameOverDialog(event = event)
+    if (viewState.isCompletedSuccessfully) GameOverDialog(event = event)
 }
 
 @Composable
@@ -105,6 +114,31 @@ private fun GameOverDialog(event: (event: InGameEvent) -> Unit) {
         onDismissRequest = { /*TODO*/ },
         title = {
             Text(text = "Game Over")
+        },
+        buttons = {
+            Row(
+                modifier = Modifier.padding(all = 8.dp),
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Button(
+                    modifier = Modifier.fillMaxWidth(),
+                    onClick = {
+                        event(InGameEvent.ResetBoard)
+                    }
+                ) {
+                    Text("Start again?")
+                }
+            }
+        }
+    )
+}
+
+@Composable
+private fun CompletedSuccessfullyDialog(event: (event: InGameEvent) -> Unit) {
+    AlertDialog(
+        onDismissRequest = { /*TODO*/ },
+        title = {
+            Text(text = "Congratulations! You win")
         },
         buttons = {
             Row(

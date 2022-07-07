@@ -1,7 +1,11 @@
 package com.nonofy.home.presentation
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -31,10 +35,11 @@ private fun HomeScreenContent(event: (HomeEvent) -> Unit) {
                 .fillMaxHeight()
         ) {
             Button(
-                onClick = { },
+                onClick = {},
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(vertical = 6.dp)
+                    .padding(vertical = 6.dp),
+                enabled = false
             ) {
                 Text(text = "Continue (Coming soon)")
             }

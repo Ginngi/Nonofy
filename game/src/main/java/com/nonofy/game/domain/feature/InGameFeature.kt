@@ -13,4 +13,5 @@ sealed class InGameEffect {
     data class GameLoaded(val nonogram: Nonogram) : InGameEffect()
     object GameOver : InGameEffect()
     object NoChanges : InGameEffect()
+    object CompletedSuccessfully : InGameEffect()
 }

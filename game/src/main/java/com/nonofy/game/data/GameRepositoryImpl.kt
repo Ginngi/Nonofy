@@ -19,7 +19,7 @@ class GameRepositoryImpl @Inject constructor(
         cacheDataSource.loadGame()
             .map {
                 return@map if (it == NonogramEntitySerializer.defaultValue) {
-                    nonogramMapper.map(nonogramDataSource.kostasGame())
+                    nonogramMapper.map(nonogramDataSource.easyTest())
                 } else {
                     it
                 }
