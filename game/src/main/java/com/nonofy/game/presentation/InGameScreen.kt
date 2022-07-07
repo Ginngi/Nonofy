@@ -3,13 +3,9 @@ package com.nonofy.game.presentation
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.AlertDialog
-import androidx.compose.material.Button
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
@@ -25,6 +21,8 @@ import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
 import com.nonofy.game.domain.feature.InGameEvent
 import com.nonofy.game.domain.models.Difficulty
+import com.nonofy.game.presentation.components.completedialog.CompletedSuccessfullyDialog
+import com.nonofy.game.presentation.components.gameoverdialog.GameOverDialog
 import com.nonofy.game.presentation.components.ingameboard.InGameBoard
 import com.nonofy.game.presentation.components.ingameboard.InGameBoardState
 import com.nonofy.game.presentation.components.lifes.Lifes
@@ -105,57 +103,7 @@ private fun InGameNonogramScreen(
     }
 
     if (viewState.isGameOver) GameOverDialog(event = event)
-    if (viewState.isCompletedSuccessfully) GameOverDialog(event = event)
-}
-
-@Composable
-private fun GameOverDialog(event: (event: InGameEvent) -> Unit) {
-    AlertDialog(
-        onDismissRequest = { /*TODO*/ },
-        title = {
-            Text(text = "Game Over")
-        },
-        buttons = {
-            Row(
-                modifier = Modifier.padding(all = 8.dp),
-                horizontalArrangement = Arrangement.Center
-            ) {
-                Button(
-                    modifier = Modifier.fillMaxWidth(),
-                    onClick = {
-                        event(InGameEvent.ResetBoard)
-                    }
-                ) {
-                    Text("Start again?")
-                }
-            }
-        }
-    )
-}
-
-@Composable
-private fun CompletedSuccessfullyDialog(event: (event: InGameEvent) -> Unit) {
-    AlertDialog(
-        onDismissRequest = { /*TODO*/ },
-        title = {
-            Text(text = "Congratulations! You win")
-        },
-        buttons = {
-            Row(
-                modifier = Modifier.padding(all = 8.dp),
-                horizontalArrangement = Arrangement.Center
-            ) {
-                Button(
-                    modifier = Modifier.fillMaxWidth(),
-                    onClick = {
-                        event(InGameEvent.ResetBoard)
-                    }
-                ) {
-                    Text("Start again?")
-                }
-            }
-        }
-    )
+    if (viewState.isCompletedSuccessfully) CompletedSuccessfullyDialog(event = event)
 }
 
 @ExperimentalFoundationApi

@@ -161,9 +161,13 @@
         <entry key="../../../../layout/compose-model-1653657868301.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.343" />
         <entry key="creative/src/main/java/com/nonofy/creative/CreativeScreen.kt" value="0.5" />
+        <entry key="creative/src/main/java/com/nonofy/creative/draw/presentation/CreativeScreen.kt" value="0.34797297297297297" />
         <entry key="game/src/main/java/com/nonofy/game/presentation/InGameScreen.kt" value="0.2796296296296296" />
+        <entry key="game/src/main/java/com/nonofy/game/presentation/components/completedialog/CompletedSuccesfullyDialog.kt" value="0.375" />
+        <entry key="game/src/main/java/com/nonofy/game/presentation/components/gameoverdialog/GameOverDialog.kt" value="0.34767932489451475" />
         <entry key="game/src/main/java/com/nonofy/game/presentation/components/headers/VerticalBoardHeader.kt" value="2.0" />
         <entry key="game/src/main/res/drawable/ic_empty_life.xml" value="0.343" />
+        <entry key="ui/src/main/java/com/nonofy/ui/components/Screen.kt" value="0.45" />
       </map>
     </option>
   </component>

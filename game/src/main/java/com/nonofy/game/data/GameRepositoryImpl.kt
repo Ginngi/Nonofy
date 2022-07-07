@@ -17,7 +17,7 @@ class GameRepositoryImpl @Inject constructor(
 ) : GameRepository {
 
     override fun loadGameById(): Flow<Nonogram> = flow {
-        emit(nonogramDataSource.easyTest())
+        emit(nonogramDataSource.kostasGame())
     }
 
     override fun loadSavedGame(): Flow<Nonogram> =
