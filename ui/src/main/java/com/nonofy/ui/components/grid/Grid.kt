@@ -8,6 +8,7 @@ import androidx.compose.foundation.lazy.LazyVerticalGrid
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.nonofy.ui.components.pixel.Pixel
@@ -23,8 +24,7 @@ fun Grid(
 ) {
     LazyVerticalGrid(
         modifier = modifier
-            .background(RedJapanese)
-            .border(5.dp, RedJapanese),
+            .background(Color.Transparent),
         cells = GridCells.Fixed(state.size)
     ) {
         itemsIndexed(state.pixels) { index, pixelState ->

@@ -12,8 +12,11 @@ class InGameReducer @Inject constructor() : Reducer<InGameEffect, InGameModel> {
             isCompletedSuccessfully = false,
             nonogram = effect.nonogram
         )
-        is InGameEffect.GameOver -> oldModel.copy(isGameOver = true)
+        is InGameEffect.GameOver -> oldModel.copy(nonogram = effect.nonogram, isGameOver = true)
         is InGameEffect.NoChanges -> oldModel
-        is InGameEffect.CompletedSuccessfully -> oldModel.copy(isCompletedSuccessfully = true)
+        is InGameEffect.CompletedSuccessfully -> oldModel.copy(
+            nonogram = effect.nonogram,
+            isCompletedSuccessfully = true
+        )
     }
 }

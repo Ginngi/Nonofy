@@ -32,23 +32,25 @@ class UpdatePixelAtPositionActionPerformer @Inject constructor(
                     params.nonogram.grid.numFilledPixels
                 }
 
+                val nonogram = params.nonogram.copy(
+                    numErrors = numErrors,
+                    grid = params.nonogram.grid.copy(
+                        pixels = updatePixelInBoardWithState(
+                            index = params.indexPixelClicked,
+                            board = params.nonogram.grid.pixels,
+                            newPixel = newPixel
+                        ).toMutableList(),
+                        numFilledPixels = numFilledPixels
+                    ),
+                )
+
                 emit(
-                    when {
-                        numErrors >= NUM_LIFES -> InGameEffect.GameOver
-                        numFilledPixels == params.nonogram.solution.numFilledPixels -> InGameEffect.CompletedSuccessfully
-                        else -> InGameEffect.GameLoaded(
-                            nonogram = params.nonogram.copy(
-                                numErrors = numErrors,
-                                grid = params.nonogram.grid.copy(
-                                    pixels = updatePixelInBoardWithState(
-                                        index = params.indexPixelClicked,
-                                        board = params.nonogram.grid.pixels,
-                                        newPixel = newPixel
-                                    ).toMutableList(),
-                                    numFilledPixels = params.nonogram.grid.numFilledPixels + 1
-                                ),
-                            )
-                        )
+                    if (numErrors >= NUM_LIFES) {
+                        InGameEffect.GameOver(nonogram)
+                    } else if (numFilledPixels == params.nonogram.solution.numFilledPixels) {
+                        InGameEffect.CompletedSuccessfully(nonogram)
+                    } else {
+                        InGameEffect.GameLoaded(nonogram)
                     }
                 )
             }
