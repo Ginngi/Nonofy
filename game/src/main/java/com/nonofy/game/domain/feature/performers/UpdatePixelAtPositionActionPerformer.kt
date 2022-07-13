@@ -1,6 +1,7 @@
 package com.nonofy.game.domain.feature.performers
 
 import com.nonofy.game.domain.feature.InGameEffect
+import com.nonofy.game.domain.models.Grid
 import com.nonofy.game.domain.models.Header
 import com.nonofy.game.domain.models.Nonogram
 import com.nonofy.game.domain.models.Pixel
@@ -35,29 +36,40 @@ class UpdatePixelAtPositionActionPerformer @Inject constructor(
                     params.nonogram.grid.numFilledPixels
                 }
 
-                val updatedGrid = params.nonogram.grid.copy(
-                    pixels = updatePixelInBoardWithState(
-                        row = row,
-                        column = column,
-                        board = params.nonogram.grid.pixels,
-                        newPixel = newPixel
-                    ),
+                val updatedPixelsBoard = updatePixelInBoardWithState(
+                    row = row,
+                    column = column,
+                    board = params.nonogram.grid.pixels,
+                    newPixel = newPixel
+                )
+
+                val updatedVerticalHeaders = updateVerticalHeaders(
+                    updatedPixelsBoard,
+                    params.nonogram.verticalHeaders,
+                    column
+                )
+
+                val updatedHorizontalHeaders = updateHorizontalHeaders(
+                    updatedPixelsBoard,
+                    params.nonogram.horizontalHeaders,
+                    row
+                )
+
+                val updatedGrid = updateGrid(
+                    board = updatedPixelsBoard,
+                    horizontalHeader = updatedHorizontalHeaders[row],
+                    verticalHeader = updatedVerticalHeaders[column],
+                    column = column,
+                    row = row,
+                    oldGrid = params.nonogram.grid,
                     numFilledPixels = numFilledPixels
                 )
 
                 val nonogram = params.nonogram.copy(
                     numErrors = numErrors,
                     grid = updatedGrid,
-                    verticalHeaders = updateVerticalHeaders(
-                        updatedGrid.pixels,
-                        params.nonogram.verticalHeaders,
-                        column
-                    ),
-                    horizontalHeaders = updateHorizontalHeaders(
-                        updatedGrid.pixels,
-                        params.nonogram.horizontalHeaders,
-                        row
-                    )
+                    verticalHeaders = updatedVerticalHeaders,
+                    horizontalHeaders = updatedHorizontalHeaders
                 )
 
                 emit(
@@ -129,6 +141,40 @@ class UpdatePixelAtPositionActionPerformer @Inject constructor(
         return headerList.toMutableList().apply {
             this[column] = newHeader
         }
+    }
+
+    private fun updateGrid(
+        board: List<List<Pixel>>,
+        horizontalHeader: Header,
+        verticalHeader: Header,
+        column: Int,
+        row: Int,
+        oldGrid: Grid,
+        numFilledPixels: Int
+    ): Grid {
+        val newBoard: MutableList<MutableList<Pixel>> =
+            board.map { it.toMutableList() }.toMutableList()
+
+        if (verticalHeader.isCompleted) {
+            newBoard.forEach {
+                if (it[column] == Pixel.EMPTY) {
+                    it[column] = Pixel.ERROR
+                }
+            }
+        }
+
+        if (horizontalHeader.isCompleted) {
+            newBoard[row].forEachIndexed { index, pixel ->
+                if (pixel == Pixel.EMPTY) {
+                    newBoard[row][index] = Pixel.ERROR
+                }
+            }
+        }
+
+        return oldGrid.copy(
+            pixels = newBoard,
+            numFilledPixels = numFilledPixels
+        )
     }
 
     data class Params(val nonogram: Nonogram, val indexPixelClicked: Int)
