@@ -32,7 +32,7 @@ fun HorizontalBoardHeader(
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
-                .background(if (header.isCompleted) Color.Transparent else RedJapanese)
+                .background(if (header.isCompleted) OldMauve else RedJapanese)
                 .padding(horizontal = 4.dp, vertical = 2.dp),
             horizontalArrangement = Arrangement.End,
         ) {

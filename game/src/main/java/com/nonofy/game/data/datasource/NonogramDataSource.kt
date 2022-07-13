@@ -29,12 +29,16 @@ class NonogramDataSource @Inject constructor() {
             size = difficulty.size,
         )
 
+        val verticalHeaders = generateVerticalHeadersFromGrid(solution)
+        val horizontalHeaders = generateHorizontalHeadersFromGrid(solution)
+        val grid = createGrid(verticalHeaders, horizontalHeaders, difficulty)
+
         return Nonogram.empty(
             title = "Easy Game",
             numErrors = 0,
-            grid = Grid.empty(difficulty),
-            verticalHeaders = generateVerticalHeadersFromGrid(solution),
-            horizontalHeaders = generateHorizontalHeadersFromGrid(solution),
+            grid = grid,
+            verticalHeaders = verticalHeaders,
+            horizontalHeaders = horizontalHeaders,
             solution = solution,
             difficulty = difficulty
         )
@@ -62,12 +66,16 @@ class NonogramDataSource @Inject constructor() {
             size = difficulty.size,
         )
 
+        val verticalHeaders = generateVerticalHeadersFromGrid(solution)
+        val horizontalHeaders = generateHorizontalHeadersFromGrid(solution)
+        val grid = createGrid(verticalHeaders, horizontalHeaders, difficulty)
+
         return Nonogram.empty(
             title = "Kostas Special Game",
             numErrors = 0,
-            grid = Grid.empty(difficulty),
-            verticalHeaders = generateVerticalHeadersFromGrid(solution),
-            horizontalHeaders = generateHorizontalHeadersFromGrid(solution),
+            grid = grid,
+            verticalHeaders = verticalHeaders,
+            horizontalHeaders = horizontalHeaders,
             solution = solution,
             difficulty = difficulty
         )
@@ -154,5 +162,40 @@ class NonogramDataSource @Inject constructor() {
             header.clear()
         }
         return horizontalHeaders
+    }
+
+    private fun createGrid(
+        verticalHeaders: List<Header>,
+        horizontalHeaders: List<Header>,
+        difficulty: Difficulty
+    ): Grid {
+        val newBoard: MutableList<MutableList<Pixel>> =
+            MutableList(difficulty.size) { MutableList(difficulty.size) { Pixel.EMPTY } }
+
+        verticalHeaders.forEachIndexed { index, header ->
+            if (header.isCompleted) {
+                newBoard.forEach {
+                    if (it[index] == Pixel.EMPTY) {
+                        it[index] = Pixel.ERROR
+                    }
+                }
+            }
+        }
+
+        horizontalHeaders.forEachIndexed { index, header ->
+            if (header.isCompleted) {
+                newBoard[index].forEachIndexed { i, pixel ->
+                    if (pixel == Pixel.EMPTY) {
+                        newBoard[index][i] = Pixel.ERROR
+                    }
+                }
+            }
+        }
+
+        return Grid(
+            pixels = newBoard,
+            numFilledPixels = 0,
+            size = difficulty.size
+        )
     }
 }

@@ -28,7 +28,7 @@ fun VerticalBoardHeader(
     ) {
         Column(
             modifier = Modifier
-                .background(if (header.isCompleted) Color.Transparent else RedJapanese)
+                .background(if (header.isCompleted) OldMauve else RedJapanese)
                 .padding(horizontal = 2.dp, vertical = 4.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Bottom
