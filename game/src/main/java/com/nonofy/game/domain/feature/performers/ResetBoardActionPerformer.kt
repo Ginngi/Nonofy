@@ -20,7 +20,17 @@ class ResetBoardActionPerformer @Inject constructor(
                     grid = params.nonogram.grid.copy(
                         numFilledPixels = 0,
                         pixels = Grid.empty(params.nonogram.difficulty).pixels
-                    )
+                    ),
+                    verticalHeaders = params.nonogram.verticalHeaders.map {
+                        if (it.filledPixels > 0) {
+                            it.copy(isCompleted = false)
+                        } else it
+                    },
+                    horizontalHeaders = params.nonogram.horizontalHeaders.map {
+                        if (it.filledPixels > 0) {
+                            it.copy(isCompleted = false)
+                        } else it
+                    }
                 )
             )
         )

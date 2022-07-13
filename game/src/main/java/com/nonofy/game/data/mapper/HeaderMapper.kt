@@ -7,6 +7,7 @@ import javax.inject.Inject
 class HeaderMapper @Inject constructor() {
     fun map(entity: GameEntity.HeaderEntity) = Header(
         value = entity.value,
+        filledPixels = entity.filledPixels,
         isCompleted = entity.isCompleted
     )
 
@@ -14,5 +15,6 @@ class HeaderMapper @Inject constructor() {
         .newBuilder()
         .setValue(entity.value)
         .setIsCompleted(entity.isCompleted)
+        .setFilledPixels(entity.filledPixels)
         .build()
 }

@@ -20,7 +20,7 @@ class InGameStateMapper @Inject constructor(
             horizontalHeader = inGameModel.nonogram.horizontalHeaders.map { headerStateMapper.map(it) },
             verticalHeader = inGameModel.nonogram.verticalHeaders.map { headerStateMapper.map(it) },
             gridState = GridState(
-                pixels = inGameModel.nonogram.grid.pixels
+                pixels = inGameModel.nonogram.grid.pixels.flatten()
                     .map { pixelMapper.map(it) },
                 size = inGameModel.nonogram.grid.size,
             ),

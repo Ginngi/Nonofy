@@ -10,7 +10,8 @@ import javax.inject.Inject
 class NonogramDataSource @Inject constructor() {
     fun easyTest(): Nonogram {
         val difficulty = Difficulty.EASY
-        val specialGrid = List(difficulty.size * difficulty.size) { if (it == 0 || it == 1) "1" else "0" }
+        val specialGrid =
+            List(difficulty.size * difficulty.size) { if (it == 0 || it == 1) "1" else "0" }
 
         val numFilled = specialGrid.count { it == "1" }
 
@@ -23,7 +24,7 @@ class NonogramDataSource @Inject constructor() {
         }
 
         val solution = Grid(
-            pixels = pixels,
+            pixels = pixels.chunked(difficulty.size),
             numFilledPixels = numFilled,
             size = difficulty.size,
         )
@@ -56,7 +57,7 @@ class NonogramDataSource @Inject constructor() {
         }
 
         val solution = Grid(
-            pixels = pixels,
+            pixels = pixels.chunked(difficulty.size),
             numFilledPixels = numFilled,
             size = difficulty.size,
         )
@@ -74,13 +75,54 @@ class NonogramDataSource @Inject constructor() {
 
     private fun generateVerticalHeadersFromGrid(grid: Grid): List<Header> {
         val verticalHeaders: MutableList<Header> = mutableListOf()
+        val header: MutableList<Int> = mutableListOf()
 
-        for (i in 0 until grid.size) {
-            val column = grid.pixels.slice(i until grid.pixels.size step grid.size)
-            val header: MutableList<Int> = mutableListOf()
+        for (i in grid.pixels.indices) {
             var numFilledPixel = 0
 
-            column.forEach {
+            for (j in grid.pixels.indices) {
+                if (grid.pixels[j][i] == Pixel.FILLED) {
+                    numFilledPixel += 1
+                } else {
+                    if (numFilledPixel != 0) {
+                        header.add(numFilledPixel)
+                        numFilledPixel = 0
+                    }
+                }
+            }
+
+            if (header.isEmpty()) {
+                verticalHeaders.add(
+                    Header(
+                        value = "0",
+                        filledPixels = 0,
+                        isCompleted = true
+                    )
+                )
+            } else {
+                verticalHeaders.add(
+                    Header(
+                        value = header.joinToString(separator = ","),
+                        filledPixels = header.sum(),
+                        isCompleted = false
+                    )
+                )
+            }
+
+            header.clear()
+        }
+
+        return verticalHeaders
+    }
+
+    private fun generateHorizontalHeadersFromGrid(grid: Grid): List<Header> {
+        val horizontalHeaders: MutableList<Header> = mutableListOf()
+        val header: MutableList<Int> = mutableListOf()
+
+        grid.pixels.forEach { pixelRow ->
+            var numFilledPixel = 0
+
+            pixelRow.forEach {
                 if (it == Pixel.FILLED) {
                     numFilledPixel += 1
                 } else {
@@ -91,74 +133,26 @@ class NonogramDataSource @Inject constructor() {
                 }
             }
 
-            if (numFilledPixel != 0) {
-                header.add(numFilledPixel)
-                numFilledPixel = 0
-            }
-
             if (header.isEmpty()) {
-                verticalHeaders.add(
+                horizontalHeaders.add(
                     Header(
                         value = "0",
+                        filledPixels = 0,
                         isCompleted = true
                     )
                 )
             } else {
-                verticalHeaders.add(
+                horizontalHeaders.add(
                     Header(
                         value = header.joinToString(separator = ","),
+                        filledPixels = header.sum(),
                         isCompleted = false
                     )
                 )
             }
+
             header.clear()
         }
-
-        return verticalHeaders
-    }
-
-    private fun generateHorizontalHeadersFromGrid(grid: Grid): List<Header> {
-        val horizontalHeaders: MutableList<Header> = mutableListOf()
-
-        var numFilledPixel = 0
-        val header: MutableList<Int> = mutableListOf()
-
-        grid.pixels.forEachIndexed { index, pixel ->
-            if (pixel == Pixel.FILLED) {
-                numFilledPixel += 1
-            } else {
-                if (numFilledPixel != 0) {
-                    header.add(numFilledPixel)
-                    numFilledPixel = 0
-                }
-            }
-
-            if ((index + 1) % grid.size == 0) {
-                if (numFilledPixel != 0) {
-                    header.add(numFilledPixel)
-                    numFilledPixel = 0
-                }
-
-                if (header.isEmpty()) {
-                    horizontalHeaders.add(
-                        Header(
-                            value = "0",
-                            isCompleted = true
-                        )
-                    )
-                } else {
-                    horizontalHeaders.add(
-                        Header(
-                            value = header.joinToString(separator = ","),
-                            isCompleted = false
-                        )
-                    )
-                }
-
-                header.clear()
-            }
-        }
-
         return horizontalHeaders
     }
 }

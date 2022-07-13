@@ -5,9 +5,9 @@ data class HeaderState(
     val isCompleted: Boolean
 ) {
     companion object {
-        fun empty() = HeaderState(
+        fun empty(isCompleted: Boolean = false) = HeaderState(
             "1,1,1",
-            false
+            isCompleted
         )
     }
 }
