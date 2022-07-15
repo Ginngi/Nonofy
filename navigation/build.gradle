@@ -5,7 +5,7 @@ apply from: "$rootDir/gradle/android-gradle-conf.gradle"
 dependencies {
     implementation(
             project(":home"),
-            project(":game"),
+            project(":game:impl"),
             project(":creative"),
     )
 

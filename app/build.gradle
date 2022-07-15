@@ -56,7 +56,7 @@ android {
 dependencies {
     implementation(
             project(":navigation"),
-            project(":game"),
+            project(":game:impl"),
             project(":home"),
             project(":creative"),
             project(":ui"),

@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package com.nonofy.game.impl.data.proto;
+
+message GridEntity {
+  repeated int32 pixels = 1;
+  int32 size = 2;
+  int32 numFilledPixels = 3;
+}
+
+message HeaderEntity {
+  string value = 1;
+  bool isCompleted = 2;
+  int32 filledPixels = 3;
+}
+
+message NonogramEntity {
+  int32 numErrors = 1;
+  string title = 2;
+  GridEntity currentGrid = 3;
+  GridEntity solution = 4;
+  repeated HeaderEntity verticalHeaders = 6;
+  repeated HeaderEntity horizontalHeaders = 7;
+
+  enum DifficultyEntity {
+    EASY = 0;
+    MEDIUM = 1;
+    HARD = 2;
+  }
+
+  DifficultyEntity difficulty = 5;
+}
+

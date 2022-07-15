@@ -5,7 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.nonofy.creative.creativeGraph
-import com.nonofy.game.presentation.InGameScreen
+import com.nonofy.game.impl.presentation.InGameScreen
 import com.nonofy.home.presentation.HomeScreen
 
 @Composable
