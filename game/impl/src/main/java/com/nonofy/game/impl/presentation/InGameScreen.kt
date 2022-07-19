@@ -30,7 +30,7 @@ import com.nonofy.ui.components.LoadingContent
 import com.nonofy.ui.components.Screen
 
 @Composable
-fun InGameScreen() {
+fun InGameScreen(gameId: String) {
     InGameScreen(inGameViewModel = hiltViewModel())
 }
 

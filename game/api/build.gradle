@@ -1,0 +1,10 @@
+import com.nonofy.Libs
+
+apply from: "$rootDir/gradle/android-gradle-conf.gradle"
+
+dependencies {
+    implementation Libs.Compose.runtime
+
+    implementation Libs.Ktx.core
+    implementation Libs.Ktx.lifecycle
+}

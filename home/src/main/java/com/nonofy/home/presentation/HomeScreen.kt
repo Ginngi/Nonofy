@@ -9,6 +9,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -22,11 +25,17 @@ fun HomeScreen() {
 
 @Composable
 private fun HomeScreen(homeViewModel: HomeViewModel) {
-    HomeScreenContent { homeViewModel.onEvent(it) }
+    val hasGameSaved by remember(homeViewModel) { homeViewModel.hasSavedGame }
+        .collectAsState()
+
+    HomeScreenContent(hasGameSaved) { homeViewModel.onEvent(it) }
 }
 
 @Composable
-private fun HomeScreenContent(event: (HomeEvent) -> Unit) {
+private fun HomeScreenContent(
+    hasGameSaved: Boolean,
+    event: (HomeEvent) -> Unit
+) {
     Screen {
         Column(
             verticalArrangement = Arrangement.Center,
@@ -34,14 +43,15 @@ private fun HomeScreenContent(event: (HomeEvent) -> Unit) {
                 .padding(horizontal = 16.dp)
                 .fillMaxHeight()
         ) {
-            Button(
-                onClick = {},
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 6.dp),
-                enabled = false
-            ) {
-                Text(text = "Continue (Coming soon)")
+            if (hasGameSaved) {
+                Button(
+                    onClick = { event(HomeEvent.ClickedContinueGame) },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 6.dp),
+                ) {
+                    Text(text = "Continue Game")
+                }
             }
 
             Button(

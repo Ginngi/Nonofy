@@ -57,6 +57,7 @@ dependencies {
     implementation(
             project(":navigation"),
             project(":game:impl"),
+            project(":game:api"),
             project(":home"),
             project(":creative"),
             project(":ui"),

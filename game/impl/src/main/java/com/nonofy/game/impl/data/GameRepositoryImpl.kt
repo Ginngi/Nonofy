@@ -27,4 +27,7 @@ class GameRepositoryImpl @Inject constructor(
     override suspend fun saveGame(nonogram: Nonogram) {
         cacheDataSource.saveGame(nonogramMapper.map(nonogram))
     }
+
+    override fun hasSavedGame(): Flow<Boolean> =
+        cacheDataSource.hasGameStarted
 }

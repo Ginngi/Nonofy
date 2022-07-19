@@ -6,6 +6,7 @@ apply from: "$rootDir/gradle/proto-gradle-conf.gradle"
 dependencies {
     implementation(
             project(":ui"),
+            project(":game:api"),
             project(":utils"),
     )
 

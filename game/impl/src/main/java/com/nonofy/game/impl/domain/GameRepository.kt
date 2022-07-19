@@ -6,5 +6,6 @@ import kotlinx.coroutines.flow.Flow
 interface GameRepository {
     fun loadGameById(): Flow<Nonogram>
     fun loadSavedGame(): Flow<Nonogram>
+    fun hasSavedGame(): Flow<Boolean>
     suspend fun saveGame(nonogram: Nonogram)
 }

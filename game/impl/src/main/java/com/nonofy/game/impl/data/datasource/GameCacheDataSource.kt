@@ -54,10 +54,7 @@ class GameCacheDataSource @Inject constructor(
     }
 
     val hasGameStarted: Flow<Boolean> = context.gameStateDataStore.data
-        .map { preferences ->
-            // No type safety.
-            preferences[KEY_GAME_STARTED] ?: false
-        }
+        .map { preferences -> preferences[KEY_GAME_STARTED] ?: false }
 
     private val KEY_GAME_STARTED = booleanPreferencesKey("game_started")
 }

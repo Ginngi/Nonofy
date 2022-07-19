@@ -1,7 +1,9 @@
 package com.nonofy.game.impl.presentation
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.nonofy.game.api.KEY_GAME_ID_PARAM
 import com.nonofy.game.impl.domain.feature.InGameEvent
 import com.nonofy.game.impl.domain.feature.InGameLogic
 import com.nonofy.game.impl.presentation.mappers.InGameStateMapper
@@ -16,7 +18,8 @@ import javax.inject.Inject
 @HiltViewModel
 class InGameViewModel @Inject constructor(
     private val inGameLogic: InGameLogic,
-    private val stateMapper: InGameStateMapper
+    private val stateMapper: InGameStateMapper,
+    private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
     val state: StateFlow<InGameState> = inGameLogic.model.map {
@@ -28,7 +31,8 @@ class InGameViewModel @Inject constructor(
     )
 
     init {
-        viewModelScope.launch { inGameLogic.init() }
+        val gameId = savedStateHandle.get<String>(KEY_GAME_ID_PARAM).orEmpty()
+        viewModelScope.launch { inGameLogic.init(gameId) }
     }
 
     fun event(event: InGameEvent) {

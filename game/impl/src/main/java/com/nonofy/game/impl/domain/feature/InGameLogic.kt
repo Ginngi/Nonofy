@@ -26,8 +26,8 @@ class InGameLogic @Inject constructor(
     scope = CoroutineScope(Dispatchers.IO),
     initialValue = InGameModel.loading()
 ) {
-    fun init() {
-        loadGameActionPerformer(LoadGameActionPerformer.Params(""))
+    fun init(gameId: String) {
+        loadGameActionPerformer(LoadGameActionPerformer.Params(gameId))
     }
 
     override fun onEvent(event: InGameEvent) {

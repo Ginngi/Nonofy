@@ -6,11 +6,15 @@ import javax.inject.Inject
 class HomeNavigatorImpl @Inject constructor(
     private val navigatorManager: NavigatorManager
 ) : HomeNavigator {
-    override fun navigateToGame() {
-        navigatorManager.navigate(Destinations.InGame)
+    override fun navigateToGame(gameId: String) {
+        navigatorManager.navigate(Destinations.InGame(gameId))
     }
 
     override fun navigateToCreativeMode() {
         navigatorManager.navigate(Destinations.Creative)
+    }
+
+    override fun navigateToSavedGame() {
+        navigatorManager.navigate(Destinations.InGame("saved"))
     }
 }

@@ -11,6 +11,6 @@ class NavigatorManager @Inject constructor() {
     }
 
     fun navigate(directions: Destinations) {
-        navController.navigate(directions.name)
+        navController.navigate(directions.uri)
     }
 }
