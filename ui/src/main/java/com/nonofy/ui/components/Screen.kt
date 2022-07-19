@@ -1,11 +1,11 @@
 package com.nonofy.ui.components
 
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.nonofy.ui.theme.OldMauve
 
 @Composable
 fun Screen(
@@ -13,7 +13,7 @@ fun Screen(
     content: @Composable () -> Unit
 ) {
     Scaffold(
-        backgroundColor = OldMauve,
+        backgroundColor = MaterialTheme.colors.background,
         modifier = modifier,
     ) {
         content()

@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -22,7 +23,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat.getSystemService
 import com.nonofy.ui.R
-import com.nonofy.ui.theme.RedJapanese
 
 @Composable
 fun Pixel(
@@ -45,7 +45,7 @@ fun Pixel(
                 painter = painterResource(id = R.drawable.ic_close),
                 contentDescription = "Error",
                 colorFilter = ColorFilter.tint(
-                    RedJapanese
+                    MaterialTheme.colors.primary
                 ),
                 modifier = Modifier
                     .fillMaxSize()
@@ -54,8 +54,9 @@ fun Pixel(
     }
 }
 
+@Composable
 private fun getColorFromState(state: PixelState) = when (state) {
-    PixelState.Filled -> RedJapanese
+    PixelState.Filled -> MaterialTheme.colors.primary
     PixelState.Empty -> Color.Transparent
     PixelState.Failed -> Color.Transparent
 }

@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.Card
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -21,8 +22,6 @@ import androidx.compose.ui.window.Dialog
 import com.nonofy.game.impl.domain.feature.InGameEvent
 import com.nonofy.ui.R
 import com.nonofy.ui.components.Screen
-import com.nonofy.ui.theme.OldMauve
-import com.nonofy.ui.theme.RedJapanese
 
 @Composable
 fun GameOverDialog(event: (event: InGameEvent) -> Unit) {
@@ -32,7 +31,7 @@ fun GameOverDialog(event: (event: InGameEvent) -> Unit) {
             shape = RoundedCornerShape(12.dp),
             modifier = Modifier
                 .padding(8.dp)
-                .background(OldMauve)
+                .background(MaterialTheme.colors.background)
         ) {
             Column(
                 modifier = Modifier.padding(all = 8.dp),
@@ -44,7 +43,7 @@ fun GameOverDialog(event: (event: InGameEvent) -> Unit) {
                     painter = painterResource(id = R.drawable.ic_sentiment_dissatisfied),
                     contentDescription = "Congratulations",
                     colorFilter = ColorFilter.tint(
-                        RedJapanese
+                        MaterialTheme.colors.primary
                     )
                 )
 

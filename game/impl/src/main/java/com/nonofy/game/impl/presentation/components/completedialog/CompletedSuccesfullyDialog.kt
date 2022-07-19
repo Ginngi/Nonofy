@@ -21,8 +21,7 @@ import androidx.compose.ui.window.Dialog
 import com.nonofy.game.impl.domain.feature.InGameEvent
 import com.nonofy.ui.R
 import com.nonofy.ui.components.Screen
-import com.nonofy.ui.theme.OldMauve
-import com.nonofy.ui.theme.RedJapanese
+import androidx.compose.material.MaterialTheme
 
 @Composable
 fun CompletedSuccessfullyDialog(event: (event: InGameEvent) -> Unit) {
@@ -32,7 +31,7 @@ fun CompletedSuccessfullyDialog(event: (event: InGameEvent) -> Unit) {
             shape = RoundedCornerShape(12.dp),
             modifier = Modifier
                 .padding(8.dp)
-                .background(OldMauve)
+                .background(MaterialTheme.colors.background)
         ) {
             Column(
                 modifier = Modifier.padding(all = 8.dp),
@@ -44,7 +43,7 @@ fun CompletedSuccessfullyDialog(event: (event: InGameEvent) -> Unit) {
                     painter = painterResource(id = R.drawable.ic_celebration),
                     contentDescription = "Congratulations",
                     colorFilter = ColorFilter.tint(
-                        RedJapanese
+                        MaterialTheme.colors.primary
                     )
                 )
 

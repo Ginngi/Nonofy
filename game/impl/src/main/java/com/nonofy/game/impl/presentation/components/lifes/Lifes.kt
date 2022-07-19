@@ -12,7 +12,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.nonofy.game.impl.R
 import com.nonofy.game.impl.domain.feature.performers.NUM_LIFES
-import com.nonofy.ui.theme.RedJapanese
+import androidx.compose.material.MaterialTheme
 
 @Composable
 fun Lifes(
@@ -28,14 +28,14 @@ fun Lifes(
                 Icon(
                     painter = painterResource(R.drawable.ic_empty_life),
                     contentDescription = "Empty life",
-                    tint = RedJapanese,
+                    tint = MaterialTheme.colors.primary,
                     modifier = Modifier.size(64.dp)
                 )
             } else {
                 Icon(
                     painter = painterResource(R.drawable.ic_filled_life),
                     contentDescription = "Filled life",
-                    tint = RedJapanese,
+                    tint = MaterialTheme.colors.primary,
                     modifier = Modifier.size(64.dp)
                 )
             }
