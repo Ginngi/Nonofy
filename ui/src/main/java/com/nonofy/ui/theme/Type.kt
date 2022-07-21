@@ -32,7 +32,7 @@ val Typography = Typography(
     h1 = TextStyle(
         fontFamily = noto,
         fontWeight = FontWeight.Black,
-        fontSize = 16.sp
+        fontSize = 24.sp
     ),
     h2 = TextStyle(
         fontFamily = noto,

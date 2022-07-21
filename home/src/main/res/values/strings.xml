@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="continue_game">Continue Game</string>
+    <string name="challenge_mode">Challenge Mode</string>
+    <string name="creative_mode">Creative Mode</string>
+</resources>

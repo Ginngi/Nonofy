@@ -163,6 +163,8 @@
         <entry key="creative/src/main/java/com/nonofy/creative/CreativeScreen.kt" value="0.5" />
         <entry key="creative/src/main/java/com/nonofy/creative/draw/presentation/CreativeScreen.kt" value="0.34797297297297297" />
         <entry key="game/impl/src/main/java/com/nonofy/game/impl/presentation/InGameScreen.kt" value="0.30648148148148147" />
+        <entry key="game/impl/src/main/java/com/nonofy/game/impl/presentation/components/completedialog/CompletedSuccesfullyDialog.kt" value="0.30648148148148147" />
+        <entry key="game/impl/src/main/java/com/nonofy/game/impl/presentation/components/gameoverdialog/GameOverDialog.kt" value="0.30648148148148147" />
         <entry key="game/impl/src/main/java/com/nonofy/game/impl/presentation/components/ingameboard/InGameBoard.kt" value="0.47685185185185186" />
         <entry key="game/impl/src/main/res/drawable/ic_filled_life.xml" value="0.1655" />
         <entry key="game/src/main/java/com/nonofy/game/presentation/InGameScreen.kt" value="0.2796296296296296" />
@@ -176,6 +178,7 @@
         <entry key="ui/src/main/res/drawable/celebration-48px.xml" value="0.245" />
         <entry key="ui/src/main/res/drawable/close-24px.xml" value="0.245" />
         <entry key="ui/src/main/res/drawable/ic_baseline_favorite_border_24.xml" value="0.245" />
+        <entry key="ui/src/main/res/drawable/ic_celebration.xml" value="0.1655" />
         <entry key="ui/src/main/res/drawable/sentiment_dissatisfied-48px.xml" value="0.245" />
       </map>
     </option>
