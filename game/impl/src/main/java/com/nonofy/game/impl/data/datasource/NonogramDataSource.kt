@@ -11,7 +11,8 @@ class NonogramDataSource @Inject constructor() {
     fun easyTest(): Nonogram {
         val difficulty = Difficulty.EASY
         val specialGrid =
-            List(difficulty.size * difficulty.size) { if (it == 0 || it == 1) "1" else "0" }
+            "1,0,0,0,0,1,1,0,0,0,0,1,1,0,0,0,0,1,1,0,0,0,0,1,1"
+                .split(",")
 
         val numFilled = specialGrid.count { it == "1" }
 
@@ -89,7 +90,8 @@ class NonogramDataSource @Inject constructor() {
             var numFilledPixel = 0
 
             for (j in grid.pixels.indices) {
-                if (grid.pixels[j][i] == Pixel.FILLED) {
+                val pixel = grid.pixels[j][i]
+                if (pixel == Pixel.FILLED) {
                     numFilledPixel += 1
                 } else {
                     if (numFilledPixel != 0) {
@@ -97,6 +99,10 @@ class NonogramDataSource @Inject constructor() {
                         numFilledPixel = 0
                     }
                 }
+            }
+
+            if (numFilledPixel != 0) {
+                header.add(numFilledPixel)
             }
 
             if (header.isEmpty()) {
@@ -139,6 +145,10 @@ class NonogramDataSource @Inject constructor() {
                         numFilledPixel = 0
                     }
                 }
+            }
+
+            if (numFilledPixel != 0) {
+                header.add(numFilledPixel)
             }
 
             if (header.isEmpty()) {

@@ -61,7 +61,7 @@ private fun CreativeScreenContent(
             )
 
             Button(onClick = {
-                val grid = state.gridState.pixels.joinToString {
+                val grid = state.gridState.pixels.joinToString(separator = ",") {
                     when (it) {
                         is PixelState.Empty -> "0"
                         else -> "1"
