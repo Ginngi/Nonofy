@@ -11,6 +11,7 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.tooling.preview.Preview
@@ -19,6 +20,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
+import com.nonofy.game.impl.com.nonofy.game.impl.presentation.components.pixelswitcher.PixelSwitcher
 import com.nonofy.game.impl.domain.feature.InGameEvent
 import com.nonofy.game.impl.domain.models.Difficulty
 import com.nonofy.game.impl.presentation.components.completedialog.CompletedSuccessfullyDialog
@@ -100,6 +102,14 @@ private fun InGameNonogramScreen(
                 event = event
             )
         }
+
+        PixelSwitcher(
+            event = event,
+            modifier = Modifier
+                .padding(top = 12.dp)
+                .align(CenterHorizontally),
+            state = viewState.isPixelModeEnabled
+        )
     }
 
     if (viewState.isGameOver) GameOverDialog(event = event)

@@ -1,5 +1,6 @@
 package com.nonofy.game.impl.domain.feature
 
+import com.nonofy.game.impl.com.nonofy.game.impl.domain.feature.performers.ChangePixelModeActionPerformer
 import com.nonofy.game.impl.domain.feature.performers.LoadGameActionPerformer
 import com.nonofy.game.impl.domain.feature.performers.ResetBoardActionPerformer
 import com.nonofy.game.impl.domain.feature.performers.SaveGameActionPerformer
@@ -14,13 +15,15 @@ class InGameLogic @Inject constructor(
     private val updatePixelAtPositionActionPerformer: UpdatePixelAtPositionActionPerformer,
     private val resetBoardActionPerformer: ResetBoardActionPerformer,
     private val saveGameActionPerformer: SaveGameActionPerformer,
-    inGameReducer: InGameReducer,
+    private val changePixelModeActionPerformer: ChangePixelModeActionPerformer,
+    private val inGameReducer: InGameReducer,
 ) : Feature<InGameModel, InGameEvent, InGameEffect>(
     actionPerformers = arrayOf(
         loadGameActionPerformer.flow,
         updatePixelAtPositionActionPerformer.flow,
         resetBoardActionPerformer.flow,
-        saveGameActionPerformer.flow
+        saveGameActionPerformer.flow,
+        changePixelModeActionPerformer.flow
     ),
     reducer = inGameReducer,
     scope = CoroutineScope(Dispatchers.IO),
@@ -35,7 +38,8 @@ class InGameLogic @Inject constructor(
             is InGameEvent.OnPixelClicked -> updatePixelAtPositionActionPerformer(
                 UpdatePixelAtPositionActionPerformer.Params(
                     model.value.nonogram,
-                    event.index
+                    event.index,
+                    model.value.isPixelEnabled
                 )
             )
             is InGameEvent.ResetBoard -> resetBoardActionPerformer(
@@ -51,6 +55,10 @@ class InGameLogic @Inject constructor(
 
             is InGameEvent.LoadGame -> loadGameActionPerformer(
                 LoadGameActionPerformer.Params("")
+            )
+
+            is InGameEvent.OnClickModeClicked -> changePixelModeActionPerformer(
+                ChangePixelModeActionPerformer.Params(event.isPixelEnabled)
             )
         }
     }

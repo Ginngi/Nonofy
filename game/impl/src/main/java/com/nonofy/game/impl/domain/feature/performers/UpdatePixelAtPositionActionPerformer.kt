@@ -23,8 +23,10 @@ class UpdatePixelAtPositionActionPerformer @Inject constructor(
                 val newPixel =
                     getNextPixelFromCurrent(params.nonogram.solution.pixels[row][column])
 
-                val numErrors =
-                    if (newPixel == Pixel.ERROR) {
+                val numErrors = if (
+                        newPixel == Pixel.ERROR && params.isPixelModeEnabled ||
+                        newPixel == Pixel.FILLED && !params.isPixelModeEnabled
+                    ) {
                         params.nonogram.numErrors + 1
                     } else {
                         params.nonogram.numErrors
@@ -177,7 +179,11 @@ class UpdatePixelAtPositionActionPerformer @Inject constructor(
         )
     }
 
-    data class Params(val nonogram: Nonogram, val indexPixelClicked: Int)
+    data class Params(
+        val nonogram: Nonogram,
+        val indexPixelClicked: Int,
+        val isPixelModeEnabled: Boolean
+    )
 }
 
 const val NUM_LIFES = 3

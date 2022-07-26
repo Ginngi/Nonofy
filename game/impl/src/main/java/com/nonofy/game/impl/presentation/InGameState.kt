@@ -8,7 +8,8 @@ data class InGameState(
     val isLoading: Boolean = false,
     val isGameOver: Boolean = false,
     val isCompletedSuccessfully: Boolean = false,
-    val inGameBoardState: InGameBoardState? = null
+    val inGameBoardState: InGameBoardState? = null,
+    val isPixelModeEnabled: Boolean = true
 ) {
     companion object {
         fun loading() = InGameState(isLoading = true)

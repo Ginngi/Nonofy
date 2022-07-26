@@ -25,6 +25,7 @@ class InGameStateMapper @Inject constructor(
                 size = inGameModel.nonogram.grid.size,
             ),
             difficulty = inGameModel.nonogram.difficulty
-        )
+        ),
+        isPixelModeEnabled = inGameModel.isPixelEnabled
     )
 }
