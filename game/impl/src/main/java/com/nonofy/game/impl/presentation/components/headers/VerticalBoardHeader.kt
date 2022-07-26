@@ -24,13 +24,13 @@ fun VerticalBoardHeader(
 ) {
     Card(
         border = BorderStroke(2.dp, MaterialTheme.colors.primary),
-        shape = RoundedCornerShape(8.dp),
+        shape = RoundedCornerShape(topStart = 8.dp, topEnd = 8.dp),
         modifier = modifier.background(Color.Transparent)
     ) {
         Column(
             modifier = Modifier
-                .background(if (header.isCompleted) MaterialTheme.colors.background else MaterialTheme.colors.primary)
-                .padding(horizontal = 2.dp, vertical = 4.dp),
+                .background(getAnimatedBackground(isCompleted = header.isCompleted).value)
+                .padding(top = 8.dp, bottom = 4.dp, start = 2.dp, end = 2.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Bottom
         ) {

@@ -174,7 +174,7 @@
         <entry key="game/src/main/res/drawable/ic_empty_life.xml" value="0.343" />
         <entry key="ui/src/main/java/com/nonofy/ui/components/Screen.kt" value="0.45" />
         <entry key="ui/src/main/java/com/nonofy/ui/components/grid/Grid.kt" value="0.375" />
-        <entry key="ui/src/main/java/com/nonofy/ui/components/pixel/Pixel.kt" value="0.125" />
+        <entry key="ui/src/main/java/com/nonofy/ui/components/pixel/Pixel.kt" value="0.45" />
         <entry key="ui/src/main/res/drawable/celebration-48px.xml" value="0.245" />
         <entry key="ui/src/main/res/drawable/close-24px.xml" value="0.245" />
         <entry key="ui/src/main/res/drawable/ic_baseline_favorite_border_24.xml" value="0.245" />

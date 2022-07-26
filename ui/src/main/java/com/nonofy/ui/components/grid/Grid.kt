@@ -26,8 +26,9 @@ fun Grid(
     pixelClickWhenFilledEnabled: Boolean = false,
 ) {
     Card(
+        elevation = 0.dp,
         border = BorderStroke(3.dp, MaterialTheme.colors.primary),
-        shape = RoundedCornerShape(8.dp),
+        shape = RoundedCornerShape(bottomEnd = 8.dp),
         modifier = modifier.background(MaterialTheme.colors.background)
     ) {
         LazyVerticalGrid(

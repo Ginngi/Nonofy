@@ -11,7 +11,7 @@ class NonogramDataSource @Inject constructor() {
     fun easyTest(): Nonogram {
         val difficulty = Difficulty.EASY
         val specialGrid =
-            "1,0,0,0,0,1,1,0,0,0,0,1,1,0,0,0,0,1,1,0,0,0,0,1,1"
+            "1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1"
                 .split(",")
 
         val numFilled = specialGrid.count { it == "1" }

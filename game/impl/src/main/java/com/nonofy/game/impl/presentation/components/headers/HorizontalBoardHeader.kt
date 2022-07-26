@@ -27,13 +27,13 @@ fun HorizontalBoardHeader(
 ) {
     Card(
         border = BorderStroke(2.dp, MaterialTheme.colors.primary),
-        shape = RoundedCornerShape(8.dp),
+        shape = RoundedCornerShape(topStart = 16.dp, bottomStart = 16.dp),
         modifier = modifier.background(Color.Transparent)
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
-                .background(if (header.isCompleted) MaterialTheme.colors.background else MaterialTheme.colors.primary)
+                .background(getAnimatedBackground(isCompleted = header.isCompleted).value)
                 .padding(horizontal = 4.dp, vertical = 2.dp),
             horizontalArrangement = Arrangement.End,
         ) {

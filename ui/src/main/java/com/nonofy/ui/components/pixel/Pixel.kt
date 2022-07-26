@@ -4,6 +4,16 @@ import android.content.Context
 import android.os.Build
 import android.os.VibrationEffect
 import android.os.Vibrator
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.CubicBezierEasing
+import androidx.compose.animation.core.LinearOutSlowInEasing
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.scaleIn
+import androidx.compose.animation.scaleOut
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -24,6 +34,7 @@ import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat.getSystemService
 import com.nonofy.ui.R
 
+@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun Pixel(
     onClickPixel: () -> Unit,
@@ -32,15 +43,29 @@ fun Pixel(
     pixelClickWhenFilledEnabled: Boolean = false,
 ) {
     val context = LocalContext.current
+
+    val animatedBackground = animateColorAsState(
+        targetValue = getColorFromState(state = state),
+        animationSpec = tween(
+            durationMillis = 300,
+            delayMillis = 50,
+            easing = LinearOutSlowInEasing
+        )
+    )
+
     Box(modifier = modifier
-        .background(getColorFromState(state))
+        .background(animatedBackground.value)
         .aspectRatio(1f)
         .clickable(enabled = !(state != PixelState.Empty && pixelClickWhenFilledEnabled)) {
             vibrate(context)
             onClickPixel()
         }
     ) {
-        if (state is PixelState.Failed) {
+        AnimatedVisibility(
+            visible = state == PixelState.Failed,
+            enter = scaleIn(animationSpec = spring(dampingRatio = Spring.DampingRatioMediumBouncy)),
+            exit = scaleOut()
+        ) {
             Image(
                 painter = painterResource(id = R.drawable.ic_close),
                 contentDescription = "Error",
