@@ -5,4 +5,6 @@
     <string name="back_to_menu">Back to menu</string>
     <string name="congratulation">Congratulations!</string>
     <string name="next_level">Next Level</string>
+    <string name="click_error_mode">Click error mode</string>
+    <string name="click_pixel_mode">Click pixel mode</string>
 </resources>

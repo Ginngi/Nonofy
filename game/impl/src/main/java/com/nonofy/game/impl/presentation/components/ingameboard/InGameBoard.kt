@@ -26,9 +26,10 @@ import com.nonofy.ui.components.grid.Grid
 @Composable
 fun InGameBoard(
     inGameBoardState: InGameBoardState,
-    event: (InGameEvent) -> Unit
+    event: (InGameEvent) -> Unit,
+    modifier: Modifier = Modifier
 ) {
-    ConstraintLayout {
+    ConstraintLayout(modifier = modifier) {
         val (verticalHeader, horizontalHeader, grid) = createRefs()
 
         Row(

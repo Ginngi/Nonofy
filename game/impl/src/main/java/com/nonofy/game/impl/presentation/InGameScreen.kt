@@ -99,14 +99,14 @@ private fun InGameNonogramScreen(
         if (viewState.inGameBoardState != null) {
             InGameBoard(
                 inGameBoardState = viewState.inGameBoardState,
-                event = event
+                event = event,
+                modifier = Modifier.padding(bottom = 16.dp)
             )
         }
 
         PixelSwitcher(
             event = event,
             modifier = Modifier
-                .padding(top = 12.dp)
                 .align(CenterHorizontally),
             state = viewState.isPixelModeEnabled
         )
