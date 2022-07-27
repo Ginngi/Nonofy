@@ -94,7 +94,6 @@ fun InGameBoard(
                     width = Dimension.preferredWrapContent
                 }
         )
-
     }
 }
 

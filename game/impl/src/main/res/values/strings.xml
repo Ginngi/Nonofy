@@ -7,4 +7,6 @@
     <string name="next_level">Next Level</string>
     <string name="click_error_mode">Click error mode</string>
     <string name="click_pixel_mode">Click pixel mode</string>
+    <string name="empty_life">Empty life</string>
+    <string name="filled_life">Filled life</string>
 </resources>

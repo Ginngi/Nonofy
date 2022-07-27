@@ -22,8 +22,7 @@ fun NonofyNavHost(navController: NavHostController) {
             GAME_SCREEN_ROUTE,
             arguments = listOf(navArgument(KEY_GAME_ID_PARAM) { type = NavType.StringType })
         ) {
-            val gameId = it.arguments?.getString(KEY_GAME_ID_PARAM, "") ?: ""
-            InGameScreen(gameId)
+            InGameScreen()
         }
 
         creativeGraph(navController, Destinations.Creative.uri)
