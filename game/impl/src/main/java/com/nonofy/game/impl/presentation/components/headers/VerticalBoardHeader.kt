@@ -17,6 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.nonofy.game.impl.domain.models.Difficulty
+import java.time.format.TextStyle
 
 @Composable
 fun VerticalBoardHeader(
@@ -34,11 +35,9 @@ fun VerticalBoardHeader(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Bottom
         ) {
-            val headerList = header.value.split(',')
-
-            for (item in headerList) {
+            for (item in header.lines) {
                 Text(
-                    text = item,
+                    text = item.numberPixels.toString(),
                     color = if (header.isCompleted) MaterialTheme.colors.primary else MaterialTheme.colors.background,
                     fontSize = getHeaderTextSizeFromDifficulty(difficulty)
                 )

@@ -110,7 +110,25 @@ class UpdatePixelAtPositionActionPerformer @Inject constructor(
         headerList: List<Header>,
         row: Int
     ): List<Header> {
-        val numFilledPixelsInRow = grid[row].count { it == Pixel.FILLED }
+        var numFilledPixelsInRow = 0
+        var numFilledPixels = 0
+        var lineIndex = 0
+
+        grid[row].forEach { pixel ->
+            if (pixel == Pixel.FILLED ) {
+                numFilledPixels++
+                numFilledPixelsInRow++
+            } else {
+                if (lineIndex < headerList[row].lines.size &&
+                        numFilledPixels == headerList[row].lines[lineIndex].numberPixels) {
+
+                } else {
+
+                }
+                lineIndex++
+            }
+        }
+
         val isCompleted = numFilledPixelsInRow >= headerList[row].filledPixels
 
         val newHeader = headerList[row].copy(

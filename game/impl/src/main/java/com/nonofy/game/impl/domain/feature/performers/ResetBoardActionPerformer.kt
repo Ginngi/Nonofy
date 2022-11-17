@@ -15,16 +15,34 @@ class ResetBoardActionPerformer @Inject constructor(
 ) : Performer<ResetBoardActionPerformer.Params, InGameEffect.GameLoaded>() {
 
     override fun createObservable(params: Params): Flow<InGameEffect.GameLoaded> = flow {
-        val verticalHeaders = params.nonogram.verticalHeaders.map {
-            if (it.filledPixels > 0) {
-                it.copy(isCompleted = false)
-            } else it
+        val verticalHeaders = params.nonogram.verticalHeaders.map { header ->
+            val lines = header.lines.map { line ->
+                if (line.numberPixels > 0) {
+                    line.copy(isCompleted = false)
+                } else line
+            }
+
+            if (header.filledPixels > 0) {
+                header.copy(
+                    lines = lines,
+                    isCompleted = false
+                )
+            } else header
         }
 
-        val horizontalHeaders = params.nonogram.horizontalHeaders.map {
-            if (it.filledPixels > 0) {
-                it.copy(isCompleted = false)
-            } else it
+        val horizontalHeaders = params.nonogram.horizontalHeaders.map { header ->
+            val lines = header.lines.map { line ->
+                if (line.numberPixels > 0) {
+                    line.copy(isCompleted = false)
+                } else line
+            }
+
+            if (header.filledPixels > 0) {
+                header.copy(
+                    lines = lines,
+                    isCompleted = false
+                )
+            } else header
         }
 
         val grid = createGrid(verticalHeaders, horizontalHeaders, params.nonogram.difficulty)

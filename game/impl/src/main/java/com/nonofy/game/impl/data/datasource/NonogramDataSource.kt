@@ -1,5 +1,6 @@
 package com.nonofy.game.impl.data.datasource
 
+import com.nonofy.game.impl.com.nonofy.game.impl.domain.models.Line
 import com.nonofy.game.impl.domain.models.Difficulty
 import com.nonofy.game.impl.domain.models.Grid
 import com.nonofy.game.impl.domain.models.Header
@@ -84,9 +85,9 @@ class NonogramDataSource @Inject constructor() {
 
     private fun generateVerticalHeadersFromGrid(grid: Grid): List<Header> {
         val verticalHeaders: MutableList<Header> = mutableListOf()
-        val header: MutableList<Int> = mutableListOf()
 
         for (i in grid.pixels.indices) {
+            val headerLines: MutableList<Line> = mutableListOf()
             var numFilledPixel = 0
 
             for (j in grid.pixels.indices) {
@@ -95,20 +96,20 @@ class NonogramDataSource @Inject constructor() {
                     numFilledPixel += 1
                 } else {
                     if (numFilledPixel != 0) {
-                        header.add(numFilledPixel)
+                        headerLines.add(Line(numFilledPixel, false))
                         numFilledPixel = 0
                     }
                 }
             }
 
             if (numFilledPixel != 0) {
-                header.add(numFilledPixel)
+                headerLines.add(Line(numFilledPixel, false))
             }
 
-            if (header.isEmpty()) {
+            if (headerLines.isEmpty()) {
                 verticalHeaders.add(
                     Header(
-                        value = "0",
+                        lines = emptyList(),
                         filledPixels = 0,
                         isCompleted = true
                     )
@@ -116,14 +117,12 @@ class NonogramDataSource @Inject constructor() {
             } else {
                 verticalHeaders.add(
                     Header(
-                        value = header.joinToString(separator = ","),
-                        filledPixels = header.sum(),
+                        lines = headerLines,
+                        filledPixels = headerLines.sumOf { it.numberPixels },
                         isCompleted = false
                     )
                 )
             }
-
-            header.clear()
         }
 
         return verticalHeaders
@@ -131,9 +130,9 @@ class NonogramDataSource @Inject constructor() {
 
     private fun generateHorizontalHeadersFromGrid(grid: Grid): List<Header> {
         val horizontalHeaders: MutableList<Header> = mutableListOf()
-        val header: MutableList<Int> = mutableListOf()
 
         grid.pixels.forEach { pixelRow ->
+            val headerLines: MutableList<Line> = mutableListOf()
             var numFilledPixel = 0
 
             pixelRow.forEach {
@@ -141,20 +140,20 @@ class NonogramDataSource @Inject constructor() {
                     numFilledPixel += 1
                 } else {
                     if (numFilledPixel != 0) {
-                        header.add(numFilledPixel)
+                        headerLines.add(Line(numFilledPixel, false))
                         numFilledPixel = 0
                     }
                 }
             }
 
             if (numFilledPixel != 0) {
-                header.add(numFilledPixel)
+                headerLines.add(Line(numFilledPixel, false))
             }
 
-            if (header.isEmpty()) {
+            if (headerLines.isEmpty()) {
                 horizontalHeaders.add(
                     Header(
-                        value = "0",
+                        lines = emptyList(),
                         filledPixels = 0,
                         isCompleted = true
                     )
@@ -162,14 +161,12 @@ class NonogramDataSource @Inject constructor() {
             } else {
                 horizontalHeaders.add(
                     Header(
-                        value = header.joinToString(separator = ","),
-                        filledPixels = header.sum(),
+                        lines = headerLines,
+                        filledPixels = headerLines.sumOf { it.numberPixels },
                         isCompleted = false
                     )
                 )
             }
-
-            header.clear()
         }
         return horizontalHeaders
     }

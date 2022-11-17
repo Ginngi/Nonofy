@@ -1,12 +1,11 @@
 package com.nonofy.ui.components.grid
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.lazy.GridCells
-import androidx.compose.foundation.lazy.LazyVerticalGrid
-import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
@@ -17,7 +16,6 @@ import androidx.compose.ui.unit.dp
 import com.nonofy.ui.components.pixel.Pixel
 
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun Grid(
     modifier: Modifier = Modifier,
@@ -34,7 +32,7 @@ fun Grid(
         LazyVerticalGrid(
             modifier = modifier
                 .background(MaterialTheme.colors.background),
-            cells = GridCells.Fixed(state.size)
+            columns = GridCells.Fixed(state.size)
         ) {
             itemsIndexed(state.pixels) { index, pixelState ->
                 Pixel(

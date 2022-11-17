@@ -8,8 +8,10 @@ import com.nonofy.game.impl.domain.feature.performers.UpdatePixelAtPositionActio
 import com.nonofy.utils.Feature
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import javax.inject.Inject
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class InGameLogic @Inject constructor(
     private val loadGameActionPerformer: LoadGameActionPerformer,
     private val updatePixelAtPositionActionPerformer: UpdatePixelAtPositionActionPerformer,

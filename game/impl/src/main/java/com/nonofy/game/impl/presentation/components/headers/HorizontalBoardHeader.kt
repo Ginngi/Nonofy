@@ -37,10 +37,9 @@ fun HorizontalBoardHeader(
                 .padding(horizontal = 4.dp, vertical = 2.dp),
             horizontalArrangement = Arrangement.End,
         ) {
-            val headerList = header.value.split(',')
-            for (item in headerList) {
+            for (item in header.lines) {
                 Text(
-                    text = item,
+                    text = item.numberPixels.toString(),
                     color = if (header.isCompleted) MaterialTheme.colors.primary else MaterialTheme.colors.background,
                     modifier = Modifier.padding(horizontal = 0.5.dp),
                     fontSize = getHeaderTextSizeFromDifficulty(difficulty),

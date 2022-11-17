@@ -31,7 +31,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.1.1"
+        kotlinCompilerExtensionVersion = "1.4.0-alpha02"
     }
 
     buildFeatures {
@@ -44,5 +44,4 @@ dependencies {
 
     kapt Libs.Hilt.compiler
     kapt Libs.Hilt.androidCompiler
-    kapt Libs.Hilt.jetpack
 }
