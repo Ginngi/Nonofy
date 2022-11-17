@@ -24,13 +24,13 @@ class UpdatePixelAtPositionActionPerformer @Inject constructor(
                     getNextPixelFromCurrent(params.nonogram.solution.pixels[row][column])
 
                 val numErrors = if (
-                        newPixel == Pixel.ERROR && params.isPixelModeEnabled ||
-                        newPixel == Pixel.FILLED && !params.isPixelModeEnabled
-                    ) {
-                        params.nonogram.numErrors + 1
-                    } else {
-                        params.nonogram.numErrors
-                    }
+                    newPixel == Pixel.ERROR && params.isPixelModeEnabled ||
+                    newPixel == Pixel.FILLED && !params.isPixelModeEnabled
+                ) {
+                    params.nonogram.numErrors + 1
+                } else {
+                    params.nonogram.numErrors
+                }
 
                 val numFilledPixels = if (newPixel == Pixel.FILLED) {
                     params.nonogram.grid.numFilledPixels + 1
@@ -45,22 +45,23 @@ class UpdatePixelAtPositionActionPerformer @Inject constructor(
                     newPixel = newPixel
                 )
 
-                val updatedVerticalHeaders = updateVerticalHeaders(
-                    updatedPixelsBoard,
-                    params.nonogram.verticalHeaders,
-                    column
+                val updatedPixelsColumn: MutableList<Pixel> = mutableListOf()
+                updatedPixelsBoard.forEach { updatedPixelsColumn.add(it[column]) }
+
+                val updatedVerticalHeader = updateHeader(
+                    updatedPixelsColumn,
+                    params.nonogram.verticalHeaders[column]
                 )
 
-                val updatedHorizontalHeaders = updateHorizontalHeaders(
-                    updatedPixelsBoard,
-                    params.nonogram.horizontalHeaders,
-                    row
+                val updatedHorizontalHeader = updateHeader(
+                    updatedPixelsBoard[row],
+                    params.nonogram.horizontalHeaders[row]
                 )
 
                 val updatedGrid = updateGrid(
                     board = updatedPixelsBoard,
-                    horizontalHeader = updatedHorizontalHeaders[row],
-                    verticalHeader = updatedVerticalHeaders[column],
+                    horizontalHeader = updatedHorizontalHeader,
+                    verticalHeader = updatedVerticalHeader,
                     column = column,
                     row = row,
                     oldGrid = params.nonogram.grid,
@@ -70,8 +71,12 @@ class UpdatePixelAtPositionActionPerformer @Inject constructor(
                 val nonogram = params.nonogram.copy(
                     numErrors = numErrors,
                     grid = updatedGrid,
-                    verticalHeaders = updatedVerticalHeaders,
-                    horizontalHeaders = updatedHorizontalHeaders
+                    verticalHeaders = params.nonogram.verticalHeaders.toMutableList().apply {
+                        this[column] = updatedVerticalHeader
+                    },
+                    horizontalHeaders = params.nonogram.horizontalHeaders.toMutableList().apply {
+                        this[row] = updatedHorizontalHeader
+                    }
                 )
 
                 emit(
@@ -84,6 +89,7 @@ class UpdatePixelAtPositionActionPerformer @Inject constructor(
                     }
                 )
             }
+
             else -> emit(InGameEffect.NoChanges)
         }
     }
@@ -105,62 +111,15 @@ class UpdatePixelAtPositionActionPerformer @Inject constructor(
         this[row] = pixelsRow
     }
 
-    private fun updateHorizontalHeaders(
-        grid: List<List<Pixel>>,
-        headerList: List<Header>,
-        row: Int
-    ): List<Header> {
-        var numFilledPixelsInRow = 0
-        var numFilledPixels = 0
-        var lineIndex = 0
+    private fun updateHeader(
+        pixels: List<Pixel>,
+        header: Header
+    ): Header {
+        val isCompleted = pixels.count { it == Pixel.FILLED } >= header.filledPixels
 
-        grid[row].forEach { pixel ->
-            if (pixel == Pixel.FILLED ) {
-                numFilledPixels++
-                numFilledPixelsInRow++
-            } else {
-                if (lineIndex < headerList[row].lines.size &&
-                        numFilledPixels == headerList[row].lines[lineIndex].numberPixels) {
-
-                } else {
-
-                }
-                lineIndex++
-            }
-        }
-
-        val isCompleted = numFilledPixelsInRow >= headerList[row].filledPixels
-
-        val newHeader = headerList[row].copy(
-            isCompleted = isCompleted
+        return header.copy(
+            isCompleted = isCompleted,
         )
-
-        return headerList.toMutableList().apply {
-            this[row] = newHeader
-        }
-    }
-
-    private fun updateVerticalHeaders(
-        grid: List<List<Pixel>>,
-        headerList: List<Header>,
-        column: Int
-    ): List<Header> {
-        var numFilledPixelsInRow = 0
-
-        grid.forEach {
-            if (it[column] == Pixel.FILLED) {
-                numFilledPixelsInRow++
-            }
-        }
-
-        val isCompleted = numFilledPixelsInRow >= headerList[column].filledPixels
-        val newHeader = headerList[column].copy(
-            isCompleted = isCompleted
-        )
-
-        return headerList.toMutableList().apply {
-            this[column] = newHeader
-        }
     }
 
     private fun updateGrid(

@@ -14,9 +14,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.nonofy.game.impl.com.nonofy.game.impl.presentation.components.headers.LineState
 import com.nonofy.game.impl.domain.models.Difficulty
 
 @Composable
@@ -40,8 +43,12 @@ fun HorizontalBoardHeader(
             for (item in header.lines) {
                 Text(
                     text = item.numberPixels.toString(),
-                    color = if (header.isCompleted) MaterialTheme.colors.primary else MaterialTheme.colors.background,
+                    color = getHeaderTextColor(
+                        isHeaderCompleted = header.isCompleted,
+                        isLineCompleted = item.isCompleted
+                    ),
                     modifier = Modifier.padding(horizontal = 0.5.dp),
+                    style = if (item.isCompleted) TextStyle(textDecoration = TextDecoration.LineThrough) else TextStyle(),
                     fontSize = getHeaderTextSizeFromDifficulty(difficulty),
                     letterSpacing = 0.5.sp
                 )
@@ -56,5 +63,21 @@ private fun DefaultPreview() {
     Column {
         HorizontalBoardHeader(HeaderState.empty(), Difficulty.MEDIUM)
         HorizontalBoardHeader(HeaderState.empty(isCompleted = true), Difficulty.MEDIUM)
+        HorizontalBoardHeader(
+            HeaderState.empty(
+                lines = listOf(
+                    LineState.empty(
+                        2,
+                        isCompleted = true
+                    ), LineState.empty(1)
+                )
+            ), Difficulty.MEDIUM
+        )
+        HorizontalBoardHeader(
+            HeaderState.empty(
+                isCompleted = true,
+                lines = listOf(LineState.empty(2, isCompleted = true), LineState.empty(1))
+            ), Difficulty.MEDIUM
+        )
     }
 }

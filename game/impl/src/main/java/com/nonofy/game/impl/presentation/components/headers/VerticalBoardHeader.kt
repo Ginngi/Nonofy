@@ -14,10 +14,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.nonofy.game.impl.com.nonofy.game.impl.presentation.components.headers.LineState
 import com.nonofy.game.impl.domain.models.Difficulty
-import java.time.format.TextStyle
 
 @Composable
 fun VerticalBoardHeader(
@@ -38,7 +39,11 @@ fun VerticalBoardHeader(
             for (item in header.lines) {
                 Text(
                     text = item.numberPixels.toString(),
-                    color = if (header.isCompleted) MaterialTheme.colors.primary else MaterialTheme.colors.background,
+                    color = getHeaderTextColor(
+                        isHeaderCompleted = header.isCompleted,
+                        isLineCompleted = item.isCompleted
+                    ),
+                    style = if (item.isCompleted) androidx.compose.ui.text.TextStyle(textDecoration = TextDecoration.LineThrough) else androidx.compose.ui.text.TextStyle(),
                     fontSize = getHeaderTextSizeFromDifficulty(difficulty)
                 )
             }
@@ -52,5 +57,21 @@ private fun DefaultPreview() {
     Row {
         VerticalBoardHeader(HeaderState.empty(), Difficulty.MEDIUM)
         VerticalBoardHeader(HeaderState.empty(isCompleted = true), Difficulty.MEDIUM)
+        VerticalBoardHeader(
+            HeaderState.empty(
+                lines = listOf(
+                    LineState.empty(
+                        2,
+                        isCompleted = true
+                    ), LineState.empty(1)
+                )
+            ), Difficulty.MEDIUM
+        )
+        VerticalBoardHeader(
+            HeaderState.empty(
+                isCompleted = true,
+                lines = listOf(LineState.empty(2, isCompleted = true), LineState.empty(1))
+            ), Difficulty.MEDIUM
+        )
     }
 }

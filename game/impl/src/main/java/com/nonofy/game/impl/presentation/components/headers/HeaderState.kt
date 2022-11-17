@@ -8,8 +8,11 @@ data class HeaderState(
     val isCompleted: Boolean
 ) {
     companion object {
-        fun empty(isCompleted: Boolean = false) = HeaderState(
-            lines = listOf(LineState.empty(2), LineState.empty(1)),
+        fun empty(
+            isCompleted: Boolean = false,
+            lines: List<LineState> = listOf(LineState.empty(2), LineState.empty(1))
+        ) = HeaderState(
+            lines = lines,
             filledPixels = 0,
             isCompleted = isCompleted
         )
