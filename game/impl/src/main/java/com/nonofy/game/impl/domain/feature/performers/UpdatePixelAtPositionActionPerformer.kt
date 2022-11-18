@@ -1,5 +1,6 @@
 package com.nonofy.game.impl.domain.feature.performers
 
+import com.nonofy.game.impl.com.nonofy.game.impl.domain.models.Line
 import com.nonofy.game.impl.domain.feature.InGameEffect
 import com.nonofy.game.impl.domain.models.Grid
 import com.nonofy.game.impl.domain.models.Header
@@ -119,7 +120,38 @@ class UpdatePixelAtPositionActionPerformer @Inject constructor(
 
         return header.copy(
             isCompleted = isCompleted,
+            lines = updateLines(pixels, header.lines)
         )
+    }
+
+    private fun updateLines(
+        pixels: List<Pixel>,
+        lines: List<Line>
+    ): List<Line> {
+        val updatedLines: MutableList<Line> = lines.toMutableList()
+
+        var lineIndex = 0
+        var filledPixels = 0
+
+        pixels.forEach {
+            if (it == Pixel.FILLED) {
+                filledPixels++
+            } else {
+                if (filledPixels != 0) {
+                    if (filledPixels >= lines[lineIndex].numberPixels) {
+                        updatedLines[lineIndex] = lines[lineIndex].copy(isCompleted = true)
+                    }
+                    lineIndex++
+                    filledPixels = 0
+                }
+            }
+        }
+
+        if (filledPixels >= lines.last().numberPixels) {
+            updatedLines[lineIndex] = lines.last().copy(isCompleted = true)
+        }
+
+        return updatedLines
     }
 
     private fun updateGrid(
