@@ -18,7 +18,7 @@ val noto = FontFamily(
 )
 
 // Set of Material typography styles to start with
-val Typography = Typography(
+val NotoTypo = Typography(
     body1 = TextStyle(
         fontFamily = noto,
         fontWeight = FontWeight.Medium,

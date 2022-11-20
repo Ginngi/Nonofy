@@ -43,7 +43,11 @@ fun VerticalBoardHeader(
                         isHeaderCompleted = header.isCompleted,
                         isLineCompleted = item.isCompleted
                     ),
-                    style = if (item.isCompleted) androidx.compose.ui.text.TextStyle(textDecoration = TextDecoration.LineThrough) else androidx.compose.ui.text.TextStyle(),
+                    style = MaterialTheme.typography.body1.copy(
+                        textDecoration = if (item.isCompleted) {
+                            TextDecoration.LineThrough
+                        } else TextDecoration.None
+                    ),
                     fontSize = getHeaderTextSizeFromDifficulty(difficulty)
                 )
             }

@@ -2,7 +2,7 @@ package com.nonofy.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val AntiqueWhite = Color(0xffF5E5D0)
-val PersianBlue = Color(0xff182290)
-val DarkByzantium = Color(0xff4B2840)
-val MistyRose = Color(0xffFBE5E6)
+val White = Color(0xfffff8e7)
+val Red = Color(0xffff4f53)
+val Black = Color(0xff2e2e2e)
+val Green = Color(0xff63C286)

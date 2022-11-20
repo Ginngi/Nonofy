@@ -14,7 +14,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -48,7 +47,11 @@ fun HorizontalBoardHeader(
                         isLineCompleted = item.isCompleted
                     ),
                     modifier = Modifier.padding(horizontal = 0.5.dp),
-                    style = if (item.isCompleted) TextStyle(textDecoration = TextDecoration.LineThrough) else TextStyle(),
+                    style = MaterialTheme.typography.body1.copy(
+                        textDecoration = if (item.isCompleted) {
+                            TextDecoration.LineThrough
+                        } else TextDecoration.None
+                    ),
                     fontSize = getHeaderTextSizeFromDifficulty(difficulty),
                     letterSpacing = 0.5.sp
                 )

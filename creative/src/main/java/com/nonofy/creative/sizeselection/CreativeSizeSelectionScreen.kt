@@ -1,9 +1,12 @@
 package com.nonofy.creative.sizeselection
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -15,7 +18,12 @@ import com.nonofy.ui.components.Screen
 @Composable
 fun CreativeSizeSelectionScreen(navController: NavController) {
     Screen {
-        Column {
+        Column(
+            verticalArrangement = Arrangement.Center,
+            modifier = Modifier
+                .padding(horizontal = 16.dp)
+                .fillMaxHeight()
+        ) {
             Button(
                 onClick = {
                     val route = buildCreativeDrawRoute(5)
@@ -25,7 +33,10 @@ fun CreativeSizeSelectionScreen(navController: NavController) {
                     .fillMaxWidth()
                     .padding(vertical = 6.dp)
             ) {
-                Text(text = "5X5")
+                Text(
+                    color = MaterialTheme.colors.background,
+                    text = "5X5"
+                )
             }
 
             Button(
@@ -34,7 +45,10 @@ fun CreativeSizeSelectionScreen(navController: NavController) {
                     .fillMaxWidth()
                     .padding(vertical = 6.dp)
             ) {
-                Text(text = "10X10")
+                Text(
+                    color = MaterialTheme.colors.background,
+                    text = "10X10"
+                )
             }
 
             Button(
@@ -43,7 +57,10 @@ fun CreativeSizeSelectionScreen(navController: NavController) {
                     .fillMaxWidth()
                     .padding(vertical = 6.dp)
             ) {
-                Text(text = "15X15")
+                Text(
+                    color = MaterialTheme.colors.background,
+                    text = "15X15"
+                )
             }
         }
     }

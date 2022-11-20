@@ -7,26 +7,26 @@ import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
 
 private val DarkColorPalette = darkColors(
-    primary = DarkByzantium,
-    background = MistyRose
+    primary = Green,
+    background = Black
 )
 
 private val LightColorPalette = lightColors(
-    primary = MistyRose,
-    background = DarkByzantium
+    primary = Red,
+    background = White
 )
 
 @Composable
 fun NonofyTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
     val colors = if (darkTheme) {
-        LightColorPalette
-    } else {
         DarkColorPalette
+    } else {
+        LightColorPalette
     }
 
     MaterialTheme(
         colors = colors,
-        typography = Typography,
+        typography = SpaceMono,
         shapes = Shapes,
         content = content
     )
