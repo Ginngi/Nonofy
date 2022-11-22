@@ -29,5 +29,5 @@ class GameRepositoryImpl @Inject constructor(
     }
 
     override fun hasSavedGame(): Flow<Boolean> =
-        cacheDataSource.hasGameStarted
+        cacheDataSource.hasGameStarted()
 }

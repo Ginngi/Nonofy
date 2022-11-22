@@ -8,15 +8,15 @@ message GridEntity {
   int32 numFilledPixels = 3;
 }
 
+message LineEntity {
+  int32 numPixels = 1;
+  bool isCompleted = 2;
+}
+
 message HeaderEntity {
   repeated LineEntity lines = 1;
   bool isCompleted = 2;
   int32 filledPixels = 3;
-}
-
-message LineEntity {
-  int32 numPixels = 1;
-  bool isCompleted = 2;
 }
 
 message NonogramEntity {

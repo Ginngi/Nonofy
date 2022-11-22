@@ -20,14 +20,15 @@ class GameCacheDataSource @Inject constructor(
     @ApplicationContext private val context: Context
 ) {
     private val Context.gameDataStore: DataStore<GameEntity.NonogramEntity> by dataStore(
-        fileName = "game",
+        fileName = "game.pb",
         serializer = NonogramEntitySerializer
     )
 
     private val Context.gameStateDataStore: DataStore<Preferences> by preferencesDataStore(
-        name = "game_state"
+        name = "game_state",
     )
 
+    @Synchronized
     fun loadGame(): Flow<GameEntity.NonogramEntity> =
         context.gameDataStore.data
 
@@ -53,7 +54,8 @@ class GameCacheDataSource @Inject constructor(
         }
     }
 
-    val hasGameStarted: Flow<Boolean> = context.gameStateDataStore.data
+    @Synchronized
+    fun hasGameStarted(): Flow<Boolean> = context.gameStateDataStore.data
         .map { preferences -> preferences[KEY_GAME_STARTED] ?: false }
 
     private val KEY_GAME_STARTED = booleanPreferencesKey("game_started")
