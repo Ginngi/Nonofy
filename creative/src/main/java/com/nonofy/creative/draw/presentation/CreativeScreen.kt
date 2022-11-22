@@ -64,7 +64,10 @@ private fun CreativeScreenContent(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.weight(0.9f)
             ) {
-                CreativeBoard(state = state.gridState)
+                CreativeBoard(
+                    state = state.gridState,
+                    event = event
+                )
             }
 
             Row(modifier = Modifier.weight(0.1f)) {

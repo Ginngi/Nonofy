@@ -17,12 +17,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
+import com.nonofy.creative.draw.domain.CreativeEvent
 import com.nonofy.ui.components.grid.Grid
 import com.nonofy.ui.components.grid.GridState
 
 @Composable
 fun CreativeBoard(
     state: GridState,
+    event: (CreativeEvent) -> Unit,
     modifier: Modifier = Modifier
 ) {
     ConstraintLayout(modifier = modifier) {
@@ -77,7 +79,7 @@ fun CreativeBoard(
 
         Grid(
             state = state,
-            onPixelClicked = {},
+            onPixelClicked = { position -> event(CreativeEvent.OnClickPixel(position)) },
             modifier = Modifier
                 .constrainAs(grid) {
                     top.linkTo(horizontalHeader.bottom)
@@ -94,6 +96,7 @@ fun CreativeBoard(
 @Composable
 fun Preview() {
     CreativeBoard(
-        GridState.empty()
+        GridState.empty(),
+        event = {}
     )
 }
