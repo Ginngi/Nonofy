@@ -12,6 +12,8 @@ dependencies {
     implementation Libs.Compose.runtime
     implementation Libs.Compose.navigation
 
+    implementation Libs.Compose.constraintLayout
+
     implementation Libs.Hilt.navigation
 
     implementation Libs.Ktx.core

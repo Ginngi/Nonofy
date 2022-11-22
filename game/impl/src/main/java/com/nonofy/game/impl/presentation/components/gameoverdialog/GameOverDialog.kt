@@ -62,7 +62,7 @@ fun GameOverDialog(event: (event: InGameEvent) -> Unit) {
                 Text(
                     color = MaterialTheme.colors.background,
                     text = stringResource(R.string.retry),
-                    style = MaterialTheme.typography.body1,
+                    style = MaterialTheme.typography.button,
                 )
             }
 
@@ -75,7 +75,7 @@ fun GameOverDialog(event: (event: InGameEvent) -> Unit) {
                 Text(
                     color = MaterialTheme.colors.background,
                     text = stringResource(R.string.back_to_menu),
-                    style = MaterialTheme.typography.body1,
+                    style = MaterialTheme.typography.button,
                 )
             }
         }

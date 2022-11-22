@@ -62,7 +62,7 @@ fun CompletedSuccessfullyDialog(event: (event: InGameEvent) -> Unit) {
                 Text(
                     color = MaterialTheme.colors.background,
                     text = stringResource(R.string.next_level),
-                    style = MaterialTheme.typography.body1,
+                    style = MaterialTheme.typography.button,
                 )
             }
 
@@ -75,7 +75,7 @@ fun CompletedSuccessfullyDialog(event: (event: InGameEvent) -> Unit) {
                 Text(
                     color = MaterialTheme.colors.background,
                     text = stringResource(R.string.back_to_menu),
-                    style = MaterialTheme.typography.body1,
+                    style = MaterialTheme.typography.button,
                 )
             }
         }

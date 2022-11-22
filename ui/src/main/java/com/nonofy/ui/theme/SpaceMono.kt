@@ -28,4 +28,9 @@ val SpaceMono = Typography(
         fontWeight = FontWeight.Bold,
         fontSize = 24.sp
     ),
+    button = TextStyle(
+        fontFamily = spaceMono,
+        fontWeight = FontWeight.Bold,
+        fontSize = 16.sp
+    ),
 )

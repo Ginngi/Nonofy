@@ -35,7 +35,8 @@ fun CreativeSizeSelectionScreen(navController: NavController) {
             ) {
                 Text(
                     color = MaterialTheme.colors.background,
-                    text = "5X5"
+                    style = MaterialTheme.typography.button,
+                    text = "5 X 5"
                 )
             }
 
@@ -47,7 +48,8 @@ fun CreativeSizeSelectionScreen(navController: NavController) {
             ) {
                 Text(
                     color = MaterialTheme.colors.background,
-                    text = "10X10"
+                    style = MaterialTheme.typography.button,
+                    text = "10 X 10"
                 )
             }
 
@@ -59,7 +61,8 @@ fun CreativeSizeSelectionScreen(navController: NavController) {
             ) {
                 Text(
                     color = MaterialTheme.colors.background,
-                    text = "15X15"
+                    style = MaterialTheme.typography.button,
+                    text = "15 X 15"
                 )
             }
         }
