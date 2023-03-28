@@ -1,38 +1,41 @@
 package com.nonofy
 
 object Libs {
-    object Compose {
-        private const val composeVersion = "1.3.1"
+    object Kotlin {
+        const val version = "1.8.0"
+    }
 
-        const val compiler = "androidx.compose.compiler:compiler:1.3.2"
-        const val activity = "androidx.activity:activity-compose:1.6.1"
-        const val ui = "androidx.compose.ui:ui:$composeVersion"
-        const val material = "androidx.compose.material:material:$composeVersion"
-        const val uiTooling = "androidx.compose.ui:ui-tooling:$composeVersion"
+    object Compose {
+        const val compilerVersion = "1.4.4"
+        const val compiler = "androidx.compose.compiler:compiler:$compilerVersion"
+        const val activity = "androidx.activity:activity-compose:1.7.0"
+        const val ui = "androidx.compose.ui:ui:1.4.0"
+        const val material = "androidx.compose.material:material:1.4.0"
+        const val uiTooling = "androidx.compose.ui:ui-tooling:1.4.0"
 
         const val navigation = "androidx.navigation:navigation-compose:2.5.3"
         const val constraintLayout = "androidx.constraintlayout:constraintlayout-compose:1.0.1"
 
-        const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-compose:2.5.1"
-        const val liveData = "androidx.compose.runtime:runtime-livedata:$composeVersion"
-        const val runtime = "androidx.compose.runtime:runtime:$composeVersion"
+        const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1"
+        const val liveData = "androidx.compose.runtime:runtime-livedata:1.4.0"
+        const val runtime = "androidx.compose.runtime:runtime:1.4.0"
 
-        const val uiTest = "androidx.compose.ui:ui-test-junit4:$composeVersion"
+        const val uiTest = "androidx.compose.ui:ui-test-junit4:1.4.0"
     }
 
     object Material {
-        const val core = "com.google.android.material:material:1.7.0"
+        const val core = "com.google.android.material:material:1.8.0"
     }
 
     object AppCompat {
-        const val core = "androidx.appcompat:appcompat:1.5.1"
+        const val core = "androidx.appcompat:appcompat:1.6.1"
     }
 
     object Ktx {
         const val core = "androidx.core:core-ktx:1.9.0"
-        const val lifecycle = "androidx.lifecycle:lifecycle-runtime-ktx:2.5.1"
-        const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
-        const val fragment = "androidx.fragment:fragment-ktx:1.5.4"
+        const val lifecycle = "androidx.lifecycle:lifecycle-runtime-ktx:2.6.1"
+        const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1"
+        const val fragment = "androidx.fragment:fragment-ktx:1.5.6"
     }
 
     object Coroutines {
@@ -40,7 +43,7 @@ object Libs {
     }
 
     object Hilt {
-        const val version = "2.44.2"
+        const val version = "2.45"
 
         const val core = "com.google.dagger:hilt-android:$version"
         const val compiler = "com.google.dagger:hilt-compiler:$version"

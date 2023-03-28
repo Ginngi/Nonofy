@@ -1,6 +1,9 @@
 import com.nonofy.Libs
 
 apply from: "$rootDir/gradle/android-gradle-conf.gradle"
+android {
+    namespace 'com.nonofy.game.api'
+}
 
 dependencies {
     implementation Libs.Compose.runtime

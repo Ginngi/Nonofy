@@ -8,7 +8,6 @@ apply plugin: 'dagger.hilt.android.plugin'
 
 android {
     compileSdk Config.compileSdkVersion
-    buildToolsVersion Config.buildToolsVersion
 
     defaultConfig {
         minSdk Config.minSdkVersion
@@ -22,20 +21,21 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
 
     kotlinOptions {
-        jvmTarget = "1.8"
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.0-alpha02"
+        jvmTarget = "11"
     }
 
     buildFeatures {
         compose true
+    }
+
+    composeOptions {
+        kotlinCompilerVersion Libs.Kotlin.version
+        kotlinCompilerExtensionVersion Libs.Compose.compilerVersion
     }
 }
 

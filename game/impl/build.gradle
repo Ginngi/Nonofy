@@ -2,6 +2,9 @@ import com.nonofy.Libs
 
 apply from: "$rootDir/gradle/android-gradle-conf.gradle"
 apply from: "$rootDir/gradle/proto-gradle-conf.gradle"
+android {
+    namespace 'com.nonofy.game.impl'
+}
 
 dependencies {
     implementation(

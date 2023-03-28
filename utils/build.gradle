@@ -1,12 +1,15 @@
 import com.nonofy.Libs
 
 apply from: "$rootDir/gradle/android-gradle-conf.gradle"
+android {
+    namespace 'com.nonofy.utils'
+}
 
 dependencies {
     implementation Libs.Ktx.core
     
     implementation Libs.Coroutines.core
 
-    implementation Libs.Compose.compiler
+    kapt Libs.Compose.compiler
     implementation Libs.Compose.runtime
 }
